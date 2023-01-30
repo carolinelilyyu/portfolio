@@ -1,20 +1,15 @@
-/*import fonts from font.css file*/
+
+
+/* import fonts from fonts.css file */ 
 @import url(./fonts.css);
 
-/* css variables */
-@import url(./partials/_variables.css);
-
-/* imports global styling */
+/* import global styling */ 
 @import url(./partials/_global.css);
 
-/* animate scrolling for each section */
+/* css variables */ 
+@import url(./partials/_variables.css);
 
-section {
-    display: grid;
-    place-items: center;
-    place-items: center;
-    min-height: 100vh;
-}
+/* animate scrolling for each section */
 
 .hidden {
     opacity: .5;
@@ -34,6 +29,7 @@ section {
 }
 
 /* end animate scrolling for each section */
+
 
 
 /* start navigation */ 
@@ -68,21 +64,21 @@ section {
 }
 
 
-/* end navigation */
+/* end navigation */ 
 
-/* Banner Area */
-.site-main .site-banner{
-    background: url(../img/banner/home-banner.png) no-repeat;
-    background-position: 0% 50%;
+/* Banner Area */ 
+
+.site-main .site-banner {
+    background: url(../img/banner/home-banner.png) no-repeat 0% 50%;
 }
 
 .site-main .site-banner .site-title h3{
     padding-top: 35%;
     font-weight: 500;
-}    
+}
 
 .site-main .site-banner .site-title h3::after{
-    content: "";
+    content: " ";
     height: 2px;
     width: 18vw;
     background: black;
@@ -99,35 +95,20 @@ section {
     font-size: 1.5rem;
 }
 
-
-.site-main .site-banner .banner-img > img{
+.site-main .site-banner .banner-image > img{
     padding: 7rem 0;
-    margin: 90rem;
-}
-/* End Banner Area */
-
-
-/* Start About Area */
-.site-main .about-area{
-    padding: 8rem 5rem;
+    width: 90rem;
 }
 
 
-.site-main .about-area .about-title h2 > span{
-    display: block;
-    font: normal bold 49px/60px var(--roboto);
-    letter-spacing: 21px;
-}
 
-.site-main .about-area .about-title .paragraph > p{
-    padding: .4rem 0;
-}
-/* End About Area */
+/* End Banner Area */ 
+
+/* Start Brand Area */ 
 
 
-/* Start Brand Area */
 .site-main .brand-area{
-    padding: 1rem 15rem;
+    padding: 1rem 20rem;
     margin-bottom: 4rem;
 }
 
@@ -140,21 +121,32 @@ section {
     border: 1px solid var(--border-color);
     text-align: center;
     padding: 1.8rem 0rem;
-    margin: .9rem 0; 
+    margin: .9rem 0;
     width: 180px;
     height: 100px;
     cursor: pointer;
-    transition: transform .4s ease
+    transition: transform .4s ease;
+}
+
+.site-main .brand-area .first-row .col-lg-4 > .single-brand > img{
+    width: 50%;
 }
 
 .site-main .brand-area .first-row .col-lg-4 > .single-brand:hover{
     box-shadow: var(--box-shadow);
-    transform: scale(1.1)
+    transform: scale(1.1);
 }
 
-
 .site-main .brand-area .first-row .col-lg-4 > .single-brand:hover > img{
-    filter:brightness(0.15)
+    filter: brightness(0.15);
+}
+
+.site-main .brand-area .rl-pic{
+    padding: 6rem 10rem;
+}
+
+.site-main .brand-area .rl-img{
+    width: 20rem;
 }
 
 .site-main .brand-area .experience-area{
@@ -166,17 +158,17 @@ section {
 }
 
 .site-main .brand-area .experience-area .years-area{
-    background: url(../img/client-info-bg.png) no-repeat 45px 20px; 
+    background: url(../img/client-info-bg.png) no-repeat 45px 20px;
     padding: 2rem 0;
     width: 40rem;
     height: 18rem;
     padding-left: 8rem;
-    position: relative; 
+    position: relative;
 }
 
 .site-main .brand-area .experience-area .bg-panel{
     position: absolute;
-    left: -120px; top:0%;
+    left: -190px; top: 0%;
     background: #e029290a;
     width: 400px;
     height: 400px;
@@ -185,23 +177,25 @@ section {
 }
 
 .site-main .brand-area .experience-area .years-area .years{
-    font: normal bold 100px/70px var(--roboto);
+    font: normal bold 84px/40px var(--roboto);
     color: var(--primary-color2);
     z-index: 2;
 }
 
 .site-main .brand-area .experience-area .years-area h2 > span{
-    font: bold 600 22px / 30px var(--roboto);
+    font: normal 600 22px/30px var(--roboto);
 }
 
-.site-main .brand-area .experience-area .call-area{
-    padding-left: 5rem;
+.site-main .brand-area .experience-area .email-area{
+    padding-left: 10rem;
 }
-/* End Brand Area */
 
-/* Services Area */
+/* End Brand Area */ 
+
+/* Services Area */ 
+
 .site-main .services-area{
-    padding: 7rem 0rem;
+    padding: 7rem 2rem;
 }
 
 .site-main .services-area .services-title{
@@ -217,15 +211,20 @@ section {
     padding: 2rem 0;
     width: 16rem;
     margin: 5rem .5rem;
-    transition: box-shadow .7s ease
+    transition: box-shadow .7s ease;
 }
 
 .site-main > .services-area .services:hover{
     box-shadow: var(--box-shadow);
 }
-/* End Services Area */
 
-/* Project Area */
+
+
+/* End Services Area */ 
+
+
+/* Project Area */ 
+
 .site-main .project-area{
     padding: 4rem 0;
 }
@@ -237,26 +236,24 @@ section {
     text-transform: uppercase;
 }
 
-.site-main .project-area .button-group button + button {
+.site-main .project-area .button-group button + button{
     padding-left: 3rem;
 }
 
 .site-main .project-area .grid .our-project > .title h4{
-    font: normal 700 25px/12px var(--roboto);
+    font: normal 700 25px/20px var(--roboto);
 }
 
-
-.site-main .project-area .grid .our-project .img a:hover{
+.site-main .project-area .grid .our-project .img a:hover img{
     filter: brightness(1.1) drop-shadow(1px 8px 30px #b1afaf);
 }
 
-.title-h1{
-    font: normal bold 39px/40px var(--roboto);
-}
 
-/* End Project Area */
 
-/* About Me */
+/* End Project Area */ 
+
+
+/* About Me */ 
 
 .site-main .about-area .about-title p{
     padding: 1rem 7rem;
@@ -265,21 +262,19 @@ section {
 .site-main .about-area .client{
     background: #ffffff10;
     box-shadow: var(--box-shadow);
-    margin: 3
-    rem 0rem;
+    margin: 3rem 0rem;
 }
 
 .site-main .about-area .client .client-img{
     padding: 2rem;
 }
 
-
 .site-main .about-area .client .about-client{
     padding-top: 2rem;
 }
 
 .site-main .about-area .client .about-client h4{
-    font: normal 500 21px/20px var(--roboto);
+    font: normal 500 21px/ 20px var(--roboto);
 }
 
 .site-main .about-area .client .about-client p{
@@ -287,7 +282,7 @@ section {
 }
 
 .site-main .about-area .owl-carousel .owl-item{
-    display:flex;
+    display: flex;
     justify-content: center;
     padding: 0 1.5rem;
 }
@@ -298,9 +293,11 @@ section {
     height: 12px;
 }
 
-/* End About Me */
 
-/* Subscribe Me */
+
+/* End About Me */ 
+
+/* Subscribe me */ 
 
 .site-main .subscribe-us-area .subscribe{
     background: url(../img/subscribe-bg.png) no-repeat;
@@ -308,11 +305,16 @@ section {
     margin: 3rem auto;
 }
 
-.site-main .subscribe-us-area .subscribe .subscribe-title h4{
-    font: normal 700 30px/30px var(--roboto);
-    color: whitesmoke;
+
+.site-main .subscribe-us-area .rl-pic{
+    width: 10rem;
+    margin: 3rem;
 }
 
+.site-main .subscribe-us-area .subscribe .subscribe-title h4{
+    font: normal 700 30px/ 30px var(--roboto);
+    color: whitesmoke;
+}
 
 .site-main .subscribe-us-area .subscribe .subscribe-title p{
     color: whitesmoke;
@@ -321,7 +323,6 @@ section {
 
 .site-main .subscribe-us-area .subscribe form .input-textbox input{
     width: 400px;
-    height: 40px;
     padding: 1.5rem 1rem;
     border: 1px solid whitesmoke;
     background: transparent;
@@ -333,31 +334,182 @@ section {
     color: whitesmoke;
 }
 
-.site-main .subscribe-us-area .subscribe form .btn-submit button{
-    background: whitesmoke;
-    color: black;
-    padding: .7rem 2rem;
-}
-/* End Subscribe Me */
+/* End subscribe me */ 
 
-/* Footer area */
+/* subscribe button */
+
+
+    .btn2 a {
+    text-decoration: none;
+    display: inline-block;
+    }
+
+    .btn2 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    }
+
+    .text {
+    padding: 0 50px;
+    visibility: hidden;
+    }
+
+    .flip-front, 
+    .flip-back {
+        border-radius: 6px;
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transform-style: flat;
+        transform-style: flat;
+        -webkit-transition: -webkit-transform .3s ease-out;
+        -o-transition: -o-transform .3s ease-out;
+        transition: transform .3s ease-out;
+    }
+
+    .flip-front {
+        color: whitesmoke;
+        border: 2px solid whitesmoke;
+        background-color: transparent;
+        -webkit-transform: rotateX(0deg) translateZ(25px);
+        -ms-transform: rotateX(0deg) translateZ(25px);
+        -o-transform: rotateX(0deg) translateZ(25px);
+        transform: rotateX(0deg) translateZ(25px);
+    }
+
+    .flip-back {
+    color: #fff;
+    background-color: #313131;
+    border: 2px solid #313131;
+    -webkit-transform: rotateX(90deg) translateZ(25px);
+    -ms-transform: rotateX(90deg) translateZ(25px);
+    -o-transform: rotateX(90deg) translateZ(25px);
+    transform: rotateX(90deg) translateZ(25px);
+    }
+
+    .btn2:hover .flip-front {
+        -webkit-transform: rotateX(-90deg) translateZ(25px);
+        -ms-transform: rotateX(-90deg) translateZ(25px);
+        -o-transform: rotateX(-90deg) translateZ(25px);
+        transform: rotateX(-90deg) translateZ(25px);
+    }
+
+    .btn2:hover .flip-back {
+        -webkit-transform: rotateX(0deg) translateZ(25px);
+        -ms-transform: rotateX(0deg) translateZ(25px);
+        -o-transform: rotateX(0deg) translateZ(25px);
+        transform: rotateX(0deg) translateZ(25px);
+}
+
+/* end subscribe button */
+
+/* Footer Area */ 
 
 footer.footer-area{
     padding: 5rem 0;
     background: url(../img/footer-bg.png) no-repeat;
 }
 
-footer.footer-area .social h5{
-    font: normal 500 23px/30px var(--roboto);
-}
-
-footer.footer-area .social a > i{
-    font-size: 22px;
-    padding: 2rem;
-    color: var(--border-color);
-}
-
 footer.footer-area .social a:hover > i{
     color: var(--primary-color);
 }
-/* End Footer area */
+
+
+/* End Footer */ 
+
+/* Buttons at Footer */
+
+/*
+    Auther: Abdelrhman Said
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+.wrapper {
+    display: inline-flex;
+    list-style: none;
+}
+
+.wrapper .icon {
+    position: relative;
+    background: #ffffff;
+    border-radius: 50%;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .linkedin:hover,
+.wrapper .linkedin:hover .tooltip,
+.wrapper .linkedin:hover .tooltip::before {
+    background: #1877F2;
+    color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+    background: #333333;
+    color: #ffffff;
+}
+
+/* End Buttons at Footer */
