@@ -33,6 +33,8 @@
     <!-- animate css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    <!-- notification css -->
+    <link rel="stylesheet" href="./css/notification.css">
 </head>
 
 <body>
@@ -43,7 +45,7 @@
     <header class="header_area animate__animated animate__bounceInDown">
         <div class="main-menu">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="./img/logo.png" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="./img/logo.png" alt="logo" class="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -82,7 +84,7 @@
     <main class="site-main">
 
         <!--  ======================= Start Banner Area =======================  -->
-        <section class="site-banner">
+        <section class="site-banner animate__animated animate__fadeIn">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 site-title animate__animated animate__fadeInRight">
@@ -91,9 +93,9 @@
                         <h4 class="title-text text-uppercase">Software Developer / Artist</h4>
                         <div class="site-buttons">
                             <div class="d-flex flex-row flex-wrap">
-                                <a href="#subscribe-us-area"><button type="button" class="btn button primary-button mr-4 text-uppercase">hire
+                                <a href="mailto:carolinelilyyu.info@gmail.com?subject=This%20is%20just%20an%20email%20to%20say%20hi%20:)"><button type="button" class="btn button primary-button mr-4 text-uppercase">hire
                                     me</button></a>
-                                <a href="./docs/Resume-Caroline-Yu.pdf"><button type="button" class="btn button secondary-button text-uppercase">Get cv</button></a>
+                                <a href="./docs/Resume-Caroline-Yu.pdf" target="_blank"><button type="button" class="btn button secondary-button text-uppercase">Get cv</button></a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +147,7 @@
                                 <div class="d-flex flex-row flex-wrap email-area">
                                 <span><i class="fas fa-envelope fa-3x px-2"></i></span>
                                     <div class="email-now">
-                                    <a href="#" class="text-uppercase h4 font-roboto">Email Now</a>
+                                    <a href="mailto:carolinelilyyu.info@gmail.com?subject=This%20is%20just%20an%20email%20to%20say%20hi%20:)" class="text-uppercase h4 font-roboto">Email Now</a>
                                     <span class="font-robot py-2">carolinelilyyu.info@gmail.com</span>
                                     </div>
                                 </div>
@@ -482,7 +484,7 @@
                                         <input type="text" id="txtemail" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="col">
-                                        <a href="#" class="btn2">
+                                        <a href="mailto:carolinelilyyu.info@gmail.com?subject=This%20is%20just%20an%20email%20to%20say%20hi%20:)" class="btn2" onclick="demo1();">
                                             <span class="text">Text</span>
                                             <span class="flip-front">Email Me</span>
                                             <span class="flip-back">Cyah Soon!</span>
@@ -505,21 +507,21 @@
             <div class="container">
                 <div class="">
                     <div class="site-logo text-center py-4">
-                        <a href="#"><img src="./img/logo.png" alt="logo"></a>
+                        <a href="#"><img src="./img/logo.png" alt="logo" class="logo"></a>
                     </div>
                     <div class="social text-center">
                         <div class="wrapper">
                             <li class="icon linkedin">
                                 <span class="tooltip">LinkedIn</span>
-                                <span><i class="fab fa-linkedin"></i></span>
+                                <span><a href="https://www.linkedin.com/in/carolinelilyyu/" target="_blank"><i class="fab fa-linkedin"></i></a></span>
                             </li>
                             <li class="icon github">
                                 <span class="tooltip">Github</span>
-                                <span><i class="fab fa-github"></i></span>
+                                <span><a href="https://github.com/carolinelilyyu/" target="_blank"><i class="fab fa-github"></i></a></span>
                             </li>
                             <li class="icon glitch">
                                 <span class="tooltip">Glitch</span>
-                                <span><i class="fas fa-fish"></i></i></span>
+                                <span><a href="https://glitch.com/@carolinelilyyu" target="_blank"><i class="fas fa-fish"></a></i></i></span>
                             </li>
                         </div>
                     </div>
@@ -552,6 +554,9 @@
     <!--  Animate Scrolling -->
     <script defer src="./js/scroll.js"></script>
 
+    <!-- notification js -->
+    <script src="./js/notification.js"></script>
+    
     <!--  custom js file  -->
     <script src="./js/main.js"></script>
 

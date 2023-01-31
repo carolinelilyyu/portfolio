@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     let $btns = $('.project-area .button-group button');
 
 
@@ -17,21 +18,11 @@ $(document).ready(function () {
 
     $('.project-area .button-group #btn1').trigger('click');
 
-    // $('.project-area .grid .test-popup-link').magnificPopup({
-    //     type: 'image',
-    //     tLoading: 'Loading image #%curr%...',
-    //     gallery: { enabled: true },
-    //     image: {
-    //         tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-    //     },
-    //     callbacks: {
-    //         open : function(){
-    //             $("test-popup-link").css("filter", "brightness(0.5)");
-    //             console.log($("test-popup-link").src)
-    //         }
-    //     }
-    // });
-
+    // MagnificPopup
+    $('.project-area .grid .test-popup-link').magnificPopup({
+        type: 'image',
+        gallery:{enabled:true}
+    });
 
     // Owl-carousel
 
@@ -69,3 +60,15 @@ $(document).ready(function () {
     navbarFixed();
 
 });
+
+function popupFunction() {
+    var popup = document.getElementById("emailPopup");
+    popup.classList.toggle("show");
+}
+
+function demo1(){
+    const notification1 = new Notification({
+    text: 'Thanks! Email Sent.',
+    canClose: true,
+    });
+}
