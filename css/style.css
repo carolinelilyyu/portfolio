@@ -247,9 +247,6 @@
 .site-main .project-area .grid .our-project .img a:hover img{
     filter: brightness(1.1) drop-shadow(1px 8px 30px #b1afaf);
 }
-
-
-
 /* End Project Area */ 
 
 
@@ -299,16 +296,14 @@
 
 /* Subscribe me */ 
 
+
 .site-main .subscribe-us-area .subscribe{
-    background: url(../img/subscribe-bg.png) no-repeat;
+    background-image: url(../img/subscribe-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-color: black; */
+    text-align: center;
     padding: 10rem 0;
-    margin: 3rem auto;
-}
-
-
-.site-main .subscribe-us-area .rl-pic{
-    width: 10rem;
-    margin: 3rem;
 }
 
 .site-main .subscribe-us-area .subscribe .subscribe-title h4{
@@ -338,6 +333,9 @@
 
 /* subscribe button */
 
+    .col{
+        margin: 1rem;
+    }
 
     .btn2 a {
     text-decoration: none;
@@ -512,4 +510,19 @@ footer.footer-area .social a:hover > i{
     color: #ffffff;
 }
 
+.wrapper .glitch:hover,
+.wrapper .glitch:hover .tooltip,
+.wrapper .glitch:hover .tooltip::before {
+    background: rgb(136, 0, 255);
+    color: #ffffff;
+}
+
+
 /* End Buttons at Footer */
+
+
+/* Magnific Popup Override */
+/* .mfp-img {
+    filter: brightness(0.5);
+} */
+/* End Magnific Popup Override */

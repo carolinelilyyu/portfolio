@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-
     let $btns = $('.project-area .button-group button');
 
 
@@ -19,10 +17,20 @@ $(document).ready(function () {
 
     $('.project-area .button-group #btn1').trigger('click');
 
-    $('.project-area .grid .test-popup-link').magnificPopup({
-        type: 'image',
-        gallery: { enabled: true }
-    });
+    // $('.project-area .grid .test-popup-link').magnificPopup({
+    //     type: 'image',
+    //     tLoading: 'Loading image #%curr%...',
+    //     gallery: { enabled: true },
+    //     image: {
+    //         tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+    //     },
+    //     callbacks: {
+    //         open : function(){
+    //             $("test-popup-link").css("filter", "brightness(0.5)");
+    //             console.log($("test-popup-link").src)
+    //         }
+    //     }
+    // });
 
 
     // Owl-carousel
