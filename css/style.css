@@ -174,12 +174,17 @@ a, a:hover, a:visited, a:active {
     position: relative;
 }
 
+.site-main .brand-area .experience-area .certifications-area{
+    padding-left: 8rem;
+    margin: 2rem;
+    position: relative;
+}
 .site-main .brand-area .experience-area .bg-panel{
     position: absolute;
     left: -190px; top: 0%;
     background: #e029290a;
     width: 400px;
-    height: 400px;
+    height: 600px;
     margin-left: 340px;
     z-index: -1;
 }
@@ -195,7 +200,9 @@ a, a:hover, a:visited, a:active {
 }
 
 .site-main .brand-area .experience-area .email-area{
+    padding: 2rem 0;
     padding-left: 10rem;
+    position: relative;
 }
 
 /* End Brand Area */ 
@@ -237,11 +244,22 @@ a, a:hover, a:visited, a:active {
     padding: 4rem 0;
 }
 
+
+.site-main .project-area .project-title .title-h3{
+    padding: 1rem 0;
+}
+
+
 .site-main .project-area .button-group button{
     background: transparent;
     border: none;
     font: normal 500 16px/130px var(--roboto);
     text-transform: uppercase;
+}
+
+
+.site-main .project-area .button-group button:hover{
+    filter: drop-shadow(1px 8px 30px #b1afaf);
 }
 
 .site-main .project-area .button-group button + button{
@@ -254,6 +272,7 @@ a, a:hover, a:visited, a:active {
 
 .site-main .project-area .grid .our-project .img a:hover img{
     filter: brightness(1.1) drop-shadow(1px 8px 30px #b1afaf);
+    transform: scale(1.1, 1.1);
 }
 /* End Project Area */ 
 
@@ -524,5 +543,3 @@ footer.footer-area .logo{
     color: #ffffff;
 }
 /* End Buttons at Footer */
-
-

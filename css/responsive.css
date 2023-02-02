@@ -3,12 +3,14 @@
 
 /* if the viewport is equal to 340px or less than that */ 
 @media only screen and (max-width: 340px){
+
     .header_area .main-menu .navbar,
     .header_area .main-menu .navbar .navbar-brand,
     .site-main .subscribe-us-area .subscribe .subscribe-title,
     .site-main .subscribe-us-area .subscribe .subscribe-title p, h4,
     .site-main .services-area,
-    .site-main .subscribe-us-area .subscribe
+    .site-main .subscribe-us-area .subscribe,
+    .site-main .brand-area
     {
         padding: 2%;
         margin: 0%;
@@ -22,14 +24,23 @@
         width: 15rem    !important;
     }
 
+
+    .site-main .subscribe-us-area .subscribe form{
+        height: 10rem;
+    }
+
+    .btn2{
+        margin-top: 2rem;
+    }
+
     .site-main > .services-area .services{
         width: 13rem;
     }
-
+    
 }
 
 
-/* if the viewport is equal to 340px or less than that */ 
+/* if the viewport is equal to 792px or less than that */ 
 @media only screen and (max-width: 792px){
     .site-main .about-area .about-title h2 > span{
         font-size: 31px;
@@ -43,10 +54,15 @@
 
     .site-main .brand-area .experience-area .bg-panel{
         margin-left: 30%;
-        width: 80%;   
+        width: 100%;   
     }
 
-    .site-main .brand-area .experience-area .call-area{
+
+    .site-main .brand-area .experience-area .certifications-area{
+        padding-left: 3%;
+    }
+
+    .site-main .brand-area .experience-area .email-area{
         padding-left: 3%;
     }
 
@@ -61,6 +77,10 @@
     .site-main .subscribe-us-area .subscribe form .input-textbox input{
         width: 20rem;
         margin: 5%;
+    }
+
+    .btn2{
+        margin-top: 2rem;
     }
 }
 

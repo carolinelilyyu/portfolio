@@ -40,6 +40,7 @@ $(document).ready(function () {
         }
     })
 
+    
     // sticky navigation menu
 
     let nav_offset_top = $('.header_area').height() + 50;
@@ -71,4 +72,13 @@ function demo1(){
     text: 'Thanks! Email Sent.',
     canClose: true,
     });
+}
+
+function open_game(){
+    window.open("https://plain-salt-subway.glitch.me/");
+}
+
+
+function open_umoc(){
+    window.open("https://www.umass.edu/umoc/");
 }

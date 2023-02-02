@@ -1,4 +1,4 @@
 # PortFolio_Website
-Complete Portfolio Website with Bootstrap - HTML/CSS In this project, we are going to learn and build how to create a complete portfolio website with bootstrap using HTML and CSS. We will understand everything from scratch. 
+This Portfolio website belongs to Caroline Yu (carolinelilyyu on Github). Written in HTML, CSS and Javascript. Please use this website with care if you are to clone it and use it as a template :) All artwork belongs to me.
 
 ## To execute this project just open index.html file in the browser.
