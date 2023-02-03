@@ -1,13 +1,13 @@
 
 
 /* import fonts from fonts.css file */ 
-@import url(./css/fonts.css);
+@import url(../css/fonts.css);
 
 /* import global styling */ 
-@import url(./css/partials/_global.css);
+@import url(../css/partials/_global.css);
 
 /* css variables */ 
-@import url(./css/partials/_variables.css);
+@import url(../css/partials/_variables.css);
 
 /* DO NOT COLOR LINKS */
 a, a:hover, a:visited, a:active {
