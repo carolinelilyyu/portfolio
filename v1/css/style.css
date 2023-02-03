@@ -11,6 +11,8 @@
 /* css variables */ 
 @import url(./partials/_variables.css);
 
+@import url(./test.css);
+
 /* DO NOT COLOR LINKS */
 a, a:hover, a:visited, a:active {
     color: inherit;
