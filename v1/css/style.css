@@ -2,14 +2,14 @@
 
 /* import fonts from fonts.css file */ 
 /* @import url(./fonts.css); */
-@import url(/v1/css/fonts.css);
+@import url(/portfolio/v1/css/fonts.css);
 
 
 /* import global styling */ 
-@import url(/v1/css/partials/_global.css);
+@import url(/portfolio/v1/css/partials/_global.css);
 
 /* css variables */ 
-@import url(/v1/css/partials/_variables.css);
+@import url(/portfolio/v1/css/partials/_variables.css);
 
 /* DO NOT COLOR LINKS */
 a, a:hover, a:visited, a:active {
