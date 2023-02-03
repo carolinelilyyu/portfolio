@@ -37,6 +37,11 @@
         width: 13rem;
     }
     
+    .site-main .brand-area .experience-area .bg-panel{
+        margin-left: 30%;
+        width: 200%;   
+    }
+
 }
 
 
