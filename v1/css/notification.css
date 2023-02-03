@@ -1,6 +1,6 @@
 
 /* css variables */ 
-@import url(./partials/_variables.css);
+@import url(/v1/css/partials/_variables.css);
 
 
 .notification-container {

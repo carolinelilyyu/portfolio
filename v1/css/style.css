@@ -1,13 +1,13 @@
 
 
 /* import fonts from fonts.css file */ 
-@import url(./fonts.css);
+@import url(/v1/css/fonts.css);
 
 /* import global styling */ 
-@import url(./partials/_global.css);
+@import url(/v1/css/partials/_global.css);
 
 /* css variables */ 
-@import url(./partials/_variables.css);
+@import url(/v1/css/partials/_variables.css);
 
 /* DO NOT COLOR LINKS */
 a, a:hover, a:visited, a:active {
@@ -77,7 +77,7 @@ a, a:hover, a:visited, a:active {
 /* Banner Area */ 
 
 .site-main .site-banner {
-    background: url(../img/banner/home-banner.png) no-repeat 0% 50%;
+    background: url(/v1/img/banner/home-banner.png) no-repeat 0% 50%;
 }
 
 .site-main .site-banner .site-title h3{
@@ -166,7 +166,7 @@ a, a:hover, a:visited, a:active {
 }
 
 .site-main .brand-area .experience-area .years-area{
-    background: url(../img/client-info-bg.png) no-repeat 45px 20px;
+    background: url(/v1/img/client-info-bg.png) no-repeat 45px 20px;
     padding: 2rem 0;
     width: 40rem;
     height: 18rem;
@@ -325,7 +325,7 @@ a, a:hover, a:visited, a:active {
 
 
 .site-main .subscribe-us-area .subscribe{
-    background-image: url(../img/subscribe-bg.png);
+    background-image: url(/v1/img/subscribe-bg.png);
     background-repeat: no-repeat;
     background-position: center;
     /* background-color: black; */
@@ -439,7 +439,7 @@ a, a:hover, a:visited, a:active {
 
 footer.footer-area{
     padding: 5rem 0;
-    background: url(../img/footer-bg.png) no-repeat;
+    background: url(/v1/img/footer-bg.png) no-repeat;
 }
 
 footer.footer-area .social a:hover > i{
