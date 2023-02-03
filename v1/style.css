@@ -1,13 +1,13 @@
 
 
 /* import fonts from fonts.css file */ 
-@import url(./fonts.css);
+@import url(./css/fonts.css);
 
 /* import global styling */ 
-@import url(./partials/global.css);
+@import url(./css/partials/_global.css);
 
 /* css variables */ 
-@import url(./partials/variables.css);
+@import url(./css/partials/_variables.css);
 
 /* DO NOT COLOR LINKS */
 a, a:hover, a:visited, a:active {
@@ -77,7 +77,7 @@ a, a:hover, a:visited, a:active {
 /* Banner Area */ 
 
 .site-main .site-banner {
-    background: url(../img/banner/home-banner.png) no-repeat 0% 50%;
+    background: url(./img/banner/home-banner.png) no-repeat 0% 50%;
 }
 
 .site-main .site-banner .site-title h3{
