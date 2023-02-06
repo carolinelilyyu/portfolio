@@ -8,3 +8,15 @@ table td{
     margin:auto;
     padding: 8rem;
 }
+
+
+.circle{
+    background-image: url(../img/circle.png);
+    background-repeat: no-repeat;
+    background-size: 9rem 9rem;
+}
+.cross{
+    background-image: url(../img/cross.png);
+    background-repeat: no-repeat;
+    background-size: 10rem 10rem;
+}
