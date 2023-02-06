@@ -269,7 +269,7 @@ a, a:hover, a:visited, a:active {
 }
 
 .site-main .project-area .grid .our-project > .title h4{
-    font: normal 700 25px/20px var(--roboto);
+    font: normal 700 25px/25px var(--roboto);
 }
 
 .site-main .project-area .grid .our-project .img a:hover img{
