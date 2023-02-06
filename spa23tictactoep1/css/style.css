@@ -1,7 +1,10 @@
-.cell {
+table td{
+    border: 1px solid #000;
     width: 10rem;
     height: 10rem;
-    margin: 20px;
-    background-color: black;
-    display:inline-block
+}
+
+.grid{
+    margin:auto;
+    padding: 8rem;
 }
