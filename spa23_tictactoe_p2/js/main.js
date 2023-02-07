@@ -1,4 +1,26 @@
 $(document).ready(function () {
+    // creates the grid 
+    var something = document.getElementsByTagName('table');
+    var tableca = something[0];
+
+    for (var i = 0; i < 3; i++) {
+        var trRow = document.createElement('tr');
+        trRow.className = "row";
+        for (var j = 0; j < 3; j++) {
+            var cell = document.createElement('td');
+            cell.className = "cell";
+            cell.dataPoints = "0";
+            trRow.appendChild(cell);
+        }                
+        tableca.appendChild(trRow);
+    }
+    document.body.appendChild(tableca);
+
+    ticTacToe();
+});
+
+function ticTacToe(){
+
     // initializes index of turns
     var index = 0;
     // determines if the game is over
@@ -49,8 +71,7 @@ $(document).ready(function () {
             }
         }
     });
-    
-});
+}
 
 function checkForWin(arr){
     // makes a 3x3 (2d array) grid updated data-points

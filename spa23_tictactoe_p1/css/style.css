@@ -1,0 +1,10 @@
+table td{
+    border: 1px solid #000;
+    width: 10rem;
+    height: 10rem;
+}
+
+.grid{
+    margin:auto;
+    padding: 8rem;
+}
