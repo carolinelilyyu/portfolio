@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // creates the grid 
-    var something = document.getElementsByTagName('table');
-    var tableca = something[0];
+    var table = document.getElementsByTagName('table');
+    var tableContent = table[0];
 
     for (var i = 0; i < 3; i++) {
         var trRow = document.createElement('tr');
@@ -12,10 +12,10 @@ $(document).ready(function () {
             cell.dataPoints = "0";
             trRow.appendChild(cell);
         }                
-        tableca.appendChild(trRow);
+        tableContent.appendChild(trRow);
     }
-    document.body.appendChild(tableca);
-
+    document.body.appendChild(tableContent);
+    
     ticTacToe();
 });
 
