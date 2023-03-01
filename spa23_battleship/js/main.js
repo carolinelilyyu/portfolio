@@ -76,42 +76,45 @@ function placeShips(turns, ship, shipSizes){
     document.querySelectorAll(".square").forEach(
         function(item){
             item.addEventListener("click", function(){
-                console.log(turns)
                 if(turns <= 0){
                     alert("GAME OVER");
                 }
-                // get the clicked square's coordinates
-                var [clickRow, clickColumn] = [parseInt(item.getAttribute("id")), parseInt(item.getAttribute("name"))]
-                // compare the own coordinates to any of the coordinates with a ship on it. If true, it's a hit. If false, it's a miss
-                for (i in ship){
-                    // each ship has details
-                    var shipDetails = ship[i]
-                    // each ship gives the coords for first and second elements
-                    var shipCoords = shipDetails.slice(0, 2);
-                    // the third element is the name of the ship
-                    var shipName = shipDetails[2];
-                    if(shipCoords.toString() == [clickRow, clickColumn].toString()){
-                        for(i in shipSizes){
-                            // if the ship belongs in the shipSizes array
-                            if(shipSizes[i].indexOf(shipName)>=0){
-                                // subtract one from the size because it's been visited
-                                shipSizes[i][1] -= 1;
-                                if(shipSizes[i][1] <= 0){
-                                    // indicates to user it blew up
-                                    alert("BLEW UP THIS SHIP");
+                if($(this).hasClass("full")){
+                    alert("Can't click this square again.")
+                }else{
+                    // get the clicked square's coordinates
+                    var [clickRow, clickColumn] = [parseInt(item.getAttribute("id")), parseInt(item.getAttribute("name"))]
+                    // compare the own coordinates to any of the coordinates with a ship on it. If true, it's a hit. If false, it's a miss
+                    for (i in ship){
+                        // each ship has details
+                        var shipDetails = ship[i]
+                        // each ship gives the coords for first and second elements
+                        var shipCoords = shipDetails.slice(0, 2);
+                        // the third element is the name of the ship
+                        var shipName = shipDetails[2];
+                        if(shipCoords.toString() == [clickRow, clickColumn].toString()){
+                            for(i in shipSizes){
+                                // if the ship belongs in the shipSizes array
+                                if(shipSizes[i].indexOf(shipName)>=0){
+                                    // subtract one from the size because it's been visited
+                                    shipSizes[i][1] -= 1;
+                                    if(shipSizes[i][1] <= 0){
+                                        // indicates to user it blew up
+                                        alert("BLEW UP THIS SHIP");
+                                    }
                                 }
                             }
+                            // not returning, different ships might have the same coordinate so we'll need to keep iterating until all ships with
+                            // that clicked coordinate have their shipSize subtracted from.
+                            $(this).addClass('red full');
+                            turns--;
                         }
-                        // not returning, different ships might have the same coordinate so we'll need to keep iterating until all ships with
-                        // that clicked coordinate have their shipSize subtracted from.
-                        $(this).addClass('red full');
-                        turns--;
                     }
-                }
-                // 
-                if($(this).hasClass("red") != true){
-                    turns--;
-                    $(this).addClass('grey full');
+                    // 
+                    if($(this).hasClass("red") != true){
+                        turns--;
+                        $(this).addClass('grey full');
+                    }
                 }
             });
         }
