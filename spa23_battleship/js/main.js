@@ -1,16 +1,60 @@
 $(document).ready(function () {
-        window.onload = function() {
-            var turns = 20;
-            var shipSizes = [];
-            buildBoard();
-            var json = makeJson();
-            // changes shipSizes 
-            var ships = getShipCoords(json, shipSizes);
-            placeShips(turns, ships, shipSizes);
+    document.getElementById("title").innerHTML = "Welcome to Battleship!"
+    let name = prompt("Please enter name of your ship (Press cancel to use defaults): ", "BigShip");
+    var json;
+    if (name == null || name == "") {
+        json = makeJson();
+    } else {
+        let orientation = prompt("Please enter the orientation like so:", "vertical");
+        let size = prompt("Please enter the size of ship (choices are 2,3,4) like so:", 4);
+        let row = prompt("Please enter the X coordinate of the row where the nose of the ship is (Max is 5):", 2);
+        let column = prompt("Please enter the Y coordinate of the row where the nose of the ship is (Max is 5):", 3);
+        json = {
+            ships: [
+                {
+                    'name' : name,
+                    'orientation': orientation,
+                    'size': parseInt(size),
+                    'coords': [parseInt(row), parseInt(column)]
+                }
+            ]
         }
+        alert("We added the ship with these details: " + JSON.stringify(json));
+    }
+    window.onload = function() {
+        var turns = 20;
+        var shipSizes = [];
+        buildBoard();
+        // changes shipSizes 
+        var ships = getShipCoords(json, shipSizes);
+        placeShips(turns, ships, shipSizes);
+    }
 });
 
 function makeJson(){
+    // make the json
+    return {
+        ships: 
+        [
+            {
+            'name': 'ship1',
+            'orientation': 'vertical',
+            'size': 4,
+            'coords':[2,3]
+            },	
+            {
+            'name':'ship2',
+            'orientation': 'horizontal',
+            'size': 3,
+            'coords':[3,3]
+            }
+        ]
+    }
+}
+
+// You may attempt to create the JSON ship object on the fly (rather than loading it) once the 
+// other functionality is completed (10 points extra credit for doing this successfully)
+function makeCustomExtraCreditJson(){
     // make the json
     return {
         ships: 
@@ -86,6 +130,7 @@ function placeShips(turns, ship, shipSizes){
                     var [clickRow, clickColumn] = [parseInt(item.getAttribute("id")), parseInt(item.getAttribute("name"))]
                     // compare the own coordinates to any of the coordinates with a ship on it. If true, it's a hit. If false, it's a miss
                     for (i in ship){
+                        console.log(ship)
                         // each ship has details
                         var shipDetails = ship[i]
                         // each ship gives the coords for first and second elements
@@ -93,6 +138,8 @@ function placeShips(turns, ship, shipSizes){
                         // the third element is the name of the ship
                         var shipName = shipDetails[2];
                         if(shipCoords.toString() == [clickRow, clickColumn].toString()){
+                            // get rid of that index up to one element because it's been visited
+                            ship.splice(i, 1)
                             for(i in shipSizes){
                                 // if the ship belongs in the shipSizes array
                                 if(shipSizes[i].indexOf(shipName)>=0){
@@ -100,7 +147,7 @@ function placeShips(turns, ship, shipSizes){
                                     shipSizes[i][1] -= 1;
                                     if(shipSizes[i][1] <= 0){
                                         // indicates to user it blew up
-                                        alert("BLEW UP THIS SHIP");
+                                        alert("BLEW UP THIS SHIP: " + shipName);
                                     }
                                 }
                             }
@@ -108,6 +155,7 @@ function placeShips(turns, ship, shipSizes){
                             // that clicked coordinate have their shipSize subtracted from.
                             $(this).addClass('red full');
                             turns--;
+                            // console.log(ship)
                         }
                     }
                     // 
@@ -115,6 +163,11 @@ function placeShips(turns, ship, shipSizes){
                         turns--;
                         $(this).addClass('grey full');
                     }
+                }
+                // the ships array is empty now. all ships have been sunk
+                if(ship.length === 0){
+                    alert("GAME OVER! YOU WIN!")
+                    location.reload();
                 }
             });
         }
