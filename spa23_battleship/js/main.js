@@ -1,6 +1,6 @@
 $(document).ready(function () {
     document.getElementById("title").innerHTML = "Welcome to Battleship!"
-    let name = prompt("Please enter name of your ship (Press cancel to use defaults): ", "BigShip");
+    let name = prompt("Please enter name of opponent's ship (Press cancel to use defaults): ", "BigShip");
     var json;
     if (name == null || name == "") {
         json = makeJson();
@@ -147,7 +147,7 @@ function placeShips(turns, ship, shipSizes){
                                     shipSizes[i][1] -= 1;
                                     if(shipSizes[i][1] <= 0){
                                         // indicates to user it blew up
-                                        alert("BLEW UP THIS SHIP: " + shipName);
+                                        alert("BLEW UP THIS SHIP!");
                                     }
                                 }
                             }
