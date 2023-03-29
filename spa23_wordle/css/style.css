@@ -24,11 +24,11 @@ h1 {
 }
 
 
-.filled-cell {
+.filled {
   border: 2px solid black;
 }
 
-.keyboard{
+#keyboard{
   display: flex;
   align-items: center;
   flex-direction: column;
