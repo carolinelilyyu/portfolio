@@ -1,67 +1,67 @@
 $(document).ready(function () {
-    var wordle = new Wordle('guana')
-    wordle.guess('guana')
-    console.log(wordle.answerMap)
+    const NUMBER_OF_GUESSES = 6
+    var wordle = new Wordle('ikppp', NUMBER_OF_GUESSES)
+    wordle.initBoard();
 });
 
+
+
 class Wordle{
-    constructor(answer){
+    constructor(answer, NUMBER_OF_GUESSES){
+        this.NUMBER_OF_GUESSES = NUMBER_OF_GUESSES
+        this.guessesRemaining = NUMBER_OF_GUESSES;
         this.answer = answer;
         this.usedLetters = [];
-        this.answerMap = makeMap(answer)
+        this.answerArray = answer.split("")
         this.displayColor = ['b', 'b', 'b', 'b', 'b']
     }
-    // for each guess, we will compare to the answer
-    guess(guessedWord){
-        var guessedWordMap = makeMap(guessedWord)
-        var answerMap = this.answerMap
-        var displayColor = this.displayColor
-        guessedWordMap.forEach(function(element, index){
-            if(answerMap.has(index)){
-                var answerLetterArray = answerMap.get(index)
-                var guessedLetterArray = guessedWordMap.get(index)
-                console.log(answerLetterArray)
-                answerLetterArray.forEach(function(currentValue, currentIndex){
-                    if(guessedLetterArray.includes(currentValue)){
-                        console.log("test")
-                        displayColor[answerLetterArray] = 'g'
-                        var index = guessedLetterArray.indexOf(currentValue)
-                        guessedLetterArray[index] = null
-                    }
-                    console.log(displayColor)
-                })
 
-                // if(guessedWordPosition.includes(answerPosition)){
-                //     console.log("test")
-
-                //     displayColor[answerPosition] = 'g'
-                //     var index = guessedWordPosition.indexOf(answerPosition)
-                //     guessedWordPosition[index] = null
-                //     console.log(guessedWordPosition)
-                // }else{
-                //     if(answerPosition == guessedWordPosition){
-                //         displayColor[index] = 'g'
-                //     }
-                // }
+    initBoard(){
+        let board = document.getElementById("board")
+    
+        for(let i = 0; i< this.NUMBER_OF_GUESSES; i++){
+            // create a row for each number of guesses
+            let row = document.createElement("div")
+            row.className = "row"
+    
+            for(let j = 0; j<5; j++){
+                let cell = document.createElement("div")
+                cell.className = "cell"
+                row.appendChild(cell)
             }
-        })
-    }
-
-}
-
-
-function makeMap(word){
-    wordMap = new Map()
-    var wordArray = word.split('')
-    for (var i = 0; i < word.length; i++) {
-        if(this.wordMap.has(wordArray[i])){
-            var arr = [i]
-            arr = arr.concat(this.wordMap.get(wordArray[i]))
-            // arr.push(this.wordMap.get(wordArray[i])) 
-            this.wordMap.set(wordArray[i], arr)
-        }else{
-            this.wordMap.set(wordArray[i], [i])
+            board.appendChild(row)
         }
     }
-    return wordMap
+
+    guess(guessWord){
+        var guessArray = guessWord.split("")
+        var answerArray = this.answerArray
+        var displayColor = this.displayColor
+        // green check
+        guessArray.forEach(function(guessElement, guessIndex){
+            var answerIndex = answerArray.indexOf(guessElement)
+            if(answerIndex == guessIndex){
+                answerArray[answerIndex] = null
+                guessArray[guessIndex] = null
+                displayColor[answerIndex] = 'g'
+            }
+            else{
+                displayColor[guessIndex] = 'b'
+            }
+        });
+        // yellow check
+        guessArray.forEach(function(guessElement, guessIndex){
+            if(guessArray[guessIndex] != null){
+                var answerIndex = answerArray.indexOf(guessElement)
+                if(answerIndex > -1){
+                    answerArray[answerIndex] = null
+                    guessArray[guessIndex] = null
+                    displayColor[guessIndex] = 'y'
+                }
+            }
+        })
+
+        console.log(displayColor)
+    }
+
 }

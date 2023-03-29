@@ -1,0 +1,50 @@
+h1 {
+  text-align: center;
+}
+
+#board {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  border: 2px solid lightgray;
+  margin: 3px;
+  height: 3rem;
+  width: 3rem;
+  justify-content: center;
+}
+
+
+.filled-cell {
+  border: 2px solid black;
+}
+
+.keyboard{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.key{
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 0.5rem;
+  margin: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.row2{
+  margin: 1rem;
+}
