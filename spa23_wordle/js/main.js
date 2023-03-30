@@ -3,7 +3,49 @@ $(document).ready(function () {
     var wordle = new Wordle('apple', NUMBER_OF_GUESSES)
     wordle.initBoard();
     wordle.listenForKeyboard();
-    wordle.keyboardEvent();
+    wordle.initDebugAnswer();
+    document.addEventListener("keyup", (e)=>{
+        // is guesses remaining goes over, game over
+        if (wordle.guessesRemaining === 0) {
+            toastr.error("Out of tries. Game Over")
+            setTimeout(function(){window.location.reload();}, 2000);
+            return
+        }
+
+        let key = e.key
+        if(key == 'Backspace'){
+            wordle.deleteLetter()
+        }
+        else if(key == 'Enter'){
+            if(wordle.nextLetter < 5){
+                toastr.error("Add more letters to your guess!")
+            }
+            else{
+                // guessing the word because this row is filled
+                var displayColorRow = wordle.guess(wordle.guessArray)
+                var winningDisplayColor = ['g', 'g', 'g', 'g', 'g']
+                wordle.colorCell(displayColorRow)
+                wordle.guessesRemaining -= 1
+                wordle.nextRow()
+                if(JSON.stringify(displayColorRow) === JSON.stringify(winningDisplayColor)){
+                    var peped = document.getElementById("peped")
+                    peped.classList.remove("hidden")
+                    toastr.success("YOU WIN! Restarting game...")
+                    toastr.success("How many tries that took: " + (6 - wordle.guessesRemaining))
+                    setTimeout(function(){window.location.reload();}, 5000);
+                }
+            }
+        }
+        else{
+            // only allow alpha characters
+            let letter = key.match(/[a-z]/gi)
+            if (!letter || letter.length > 1) {
+                return
+            } else {
+                wordle.insertLetter(key)
+            }
+        }
+    })
 });
 
 
@@ -17,13 +59,27 @@ class Wordle{
         this.usedLetters = [];
         this.answerArray = answer.split("")
         this.guessArray = []
-        this.displayColor = ['b', 'b', 'b', 'b', 'b']
+        this.displayColor =  ['b', 'b', 'b', 'b', 'b']
+    }
+
+    initDebugAnswer(){
+        var debug = document.getElementById("debug")
+        debug.addEventListener("click", (e)=>{
+            debug.innerHTML = this.answer
+        })
+    }
+
+    nextRow(){
+        this.nextLetter = 0
+        this.guessArray = []
+        this.displayColor =  ['b', 'b', 'b', 'b', 'b']
+        this.answerArray = this.answer.split("")
     }
 
     listenForKeyboard(){
-        var board = document.getElementById("keyboard")
+        var keyboard = document.getElementById("keyboard")
 
-        board.addEventListener("click", (e)=>{
+        keyboard.addEventListener("click", (e)=>{
             var target = e.target
             if (!target.classList.contains("key")) {
                 return
@@ -41,33 +97,6 @@ class Wordle{
         })
     }
 
-    keyboardEvent(){
-        // we are adding an event with key set to the letter that was from listenForKeyboard()
-        document.addEventListener("keyup", (e)=>{
-            if (this.guessesRemaining === 0) {
-                return
-            }
-
-            let key = e.key
-            if(key == 'Backspace'){
-                this.deleteLetter()
-            }
-            else if(key == 'Enter'){
-                if(this.nextLetter < 4){
-                    alert("Add more letters to your guess!")
-                }
-                else{
-                    console.log("lets guess")
-                    // console.log(this.guessArray)
-                    this.guess(this.guessArray)
-                }
-            }
-            else{
-                this.insertLetter(key)
-            }
-        })
-    }
-
     deleteLetter(){
         let row = document.getElementsByClassName("row")[6 - this.guessesRemaining]
         let cell = row.children[this.nextLetter - 1]
@@ -75,8 +104,6 @@ class Wordle{
         cell.classList.remove('filled')
         this.guessArray.pop()
         this.nextLetter -= 1
-
-        // console.log(this.guessArray)
     }
 
     insertLetter(key){
@@ -90,8 +117,6 @@ class Wordle{
         cell.classList.add('filled')
         this.guessArray.push(pressedKey)
         this.nextLetter += 1
-
-        // console.log(this.guessArray)
     }
 
     initBoard(){
@@ -115,17 +140,13 @@ class Wordle{
     guess(guessArray){
         var answerArray = this.answerArray
         var displayColor = this.displayColor
+        var usedLetters = this.usedLetters
         // green check
         guessArray.forEach(function(guessElement, guessIndex){
-            var answerIndex = answerArray.indexOf(guessElement)
-            console.log(answerIndex)
-            if(answerIndex === guessIndex){
-                answerArray[answerIndex] = null
+            if(answerArray[guessIndex] === guessArray[guessIndex]){
+                answerArray[guessIndex] = null
                 guessArray[guessIndex] = null
-                displayColor[answerIndex] = 'g'
-            }
-            else{
-                displayColor[guessIndex] = 'b'
+                displayColor[guessIndex] = 'g'
             }
         });
         // yellow check
@@ -137,10 +158,30 @@ class Wordle{
                     guessArray[guessIndex] = null
                     displayColor[guessIndex] = 'y'
                 }
+                else{
+                    if(!usedLetters.includes(guessElement)){
+                        usedLetters.push(guessElement)
+                    }
+                    document.getElementById("used-letters").innerHTML = usedLetters.join(" ")
+                }
             }
         })
 
-        console.log(displayColor)
+        return displayColor
+    }
+
+    colorCell(displayColorRow){
+        var guessesRemaining =  this.guessesRemaining
+        let row = document.getElementsByClassName("row")[6 - guessesRemaining]
+        displayColorRow.forEach(function(element, index){
+            if(element === 'g'){
+                row.children[index].classList.add('green')
+            }else if(element === 'y'){
+                row.children[index].classList.add('yellow')
+            }else{
+                row.children[index].classList.add('gray')
+            }
+        });
     }
 
 }

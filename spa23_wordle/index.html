@@ -7,54 +7,74 @@
     <title>Wordle</title>
     <!-- custom style sheet -->
     <link rel="stylesheet" href="css/style.css" class="">
-
+    <!-- toastr notifications -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <!-- animate css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-    <h1>Wordle</h1>
-    <div id="board">
+    <div id="peped" class="hidden">
+        <!-- display when you win -->
+        <img class="background" src="./img/peped.gif">
     </div>
+    
+    <div class="wordle">
+        <h1>Wordle</h1>
 
-    <!-- keyboard -->
+        <!-- debug button for answer -->
+        <div id="debug">Debug</div>
 
-    <div id="keyboard">
-        <div class="row1">
-            <button class="key">q</button>
-            <button class="key">w</button>
-            <button class="key">e</button>
-            <button class="key">r</button>
-            <button class="key">t</button>
-            <button class="key">y</button>
-            <button class="key">u</button>
-            <button class="key">i</button>
-            <button class="key">o</button>
-            <button class="key">p</button>
+        <!-- board for wordle -->
+        <div id="board">
         </div>
-        <div class="row2">
-            <button class="key">a</button>
-            <button class="key">s</button>
-            <button class="key">d</button>
-            <button class="key">f</button>
-            <button class="key">g</button>
-            <button class="key">h</button>
-            <button class="key">j</button>
-            <button class="key">k</button>
-            <button class="key">l</button>
+
+        <!-- keyboard -->
+
+        <div id="keyboard">
+            <div class="row1">
+                <button class="key">q</button>
+                <button class="key">w</button>
+                <button class="key">e</button>
+                <button class="key">r</button>
+                <button class="key">t</button>
+                <button class="key">y</button>
+                <button class="key">u</button>
+                <button class="key">i</button>
+                <button class="key">o</button>
+                <button class="key">p</button>
+            </div>
+            <div class="row2">
+                <button class="key">a</button>
+                <button class="key">s</button>
+                <button class="key">d</button>
+                <button class="key">f</button>
+                <button class="key">g</button>
+                <button class="key">h</button>
+                <button class="key">j</button>
+                <button class="key">k</button>
+                <button class="key">l</button>
+            </div>
+            <div class="row3">
+                <button class="key">del</button>
+                <button class="key">z</button>
+                <button class="key">x</button>
+                <button class="key">c</button>
+                <button class="key">v</button>
+                <button class="key">b</button>
+                <button class="key">n</button>
+                <button class="key">m</button>
+                <button class="key">enter</button>
+            </div>
         </div>
-        <div class="row3">
-            <button class="key">del</button>
-            <button class="key">z</button>
-            <button class="key">x</button>
-            <button class="key">c</button>
-            <button class="key">v</button>
-            <button class="key">b</button>
-            <button class="key">n</button>
-            <button class="key">m</button>
-            <button class="key">enter</button>
-        </div>
+        <h2>Used Letters</h2>
+        <div id="used-letters"></div>
     </div>
+    
     <!--  Jquery js file  -->
     <script src="./js/jquery.3.4.1.js"></script>
     <!-- custom js file -->
     <script src="./js/main.js"></script>
+    <!-- toastr notifications -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </body>
 </html>
