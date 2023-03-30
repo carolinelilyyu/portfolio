@@ -21,18 +21,24 @@ $(document).ready(function () {
                 toastr.error("Add more letters to your guess!")
             }
             else{
+                var word = wordle.guessArray.join("")
                 // guessing the word because this row is filled
-                var displayColorRow = wordle.guess(wordle.guessArray)
-                var winningDisplayColor = ['g', 'g', 'g', 'g', 'g']
-                wordle.colorCell(displayColorRow)
-                wordle.guessesRemaining -= 1
-                wordle.nextRow()
-                if(JSON.stringify(displayColorRow) === JSON.stringify(winningDisplayColor)){
-                    var peped = document.getElementById("peped")
-                    peped.classList.remove("hidden")
-                    toastr.success("YOU WIN! Restarting game...")
-                    toastr.success("How many tries that took: " + (6 - wordle.guessesRemaining))
-                    setTimeout(function(){window.location.reload();}, 5000);
+                if(wordle.isRealWord(word) == false){
+                    toastr.error("This isn't a real word")
+                }else{
+                    console.log("this is a real word")
+                    var displayColorRow = wordle.guess(wordle.guessArray)
+                    var winningDisplayColor = ['g', 'g', 'g', 'g', 'g']
+                    wordle.colorCell(displayColorRow)
+                    wordle.guessesRemaining -= 1
+                    wordle.nextRow()
+                    if(JSON.stringify(displayColorRow) === JSON.stringify(winningDisplayColor)){
+                        var peped = document.getElementById("peped")
+                        peped.classList.remove("hidden")
+                        toastr.success("YOU WIN! Restarting game...")
+                        toastr.success("How many tries that took: " + (6 - wordle.guessesRemaining))
+                        setTimeout(function(){window.location.reload();}, 5000);
+                    }
                 }
             }
         }
@@ -60,6 +66,30 @@ class Wordle{
         this.answerArray = answer.split("")
         this.guessArray = []
         this.displayColor =  ['b', 'b', 'b', 'b', 'b']
+    }
+
+    async isRealWord(word){
+        var url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word
+        var responseBool = await this.apiCall(url);
+        return responseBool
+    }
+    
+    apiCall(url){
+        var responseBool = false;
+        fetch(url).then(function(response){
+            // The API call was successful!
+            if(response.status === 200){
+                responseBool = true
+            }
+            else{
+                responseBool = false;
+            }
+        }).catch(function (err) {
+            // There was an error
+            responseBool = false;
+            console.warn('Something went wrong.', err);
+        });
+        return responseBool
     }
 
     initDebugAnswer(){
