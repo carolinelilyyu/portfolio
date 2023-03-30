@@ -23,23 +23,28 @@ $(document).ready(function () {
             else{
                 var word = wordle.guessArray.join("")
                 // guessing the word because this row is filled
-                if(wordle.isRealWord(word) == false){
-                    toastr.error("This isn't a real word")
-                }else{
-                    console.log("this is a real word")
-                    var displayColorRow = wordle.guess(wordle.guessArray)
-                    var winningDisplayColor = ['g', 'g', 'g', 'g', 'g']
-                    wordle.colorCell(displayColorRow)
-                    wordle.guessesRemaining -= 1
-                    wordle.nextRow()
-                    if(JSON.stringify(displayColorRow) === JSON.stringify(winningDisplayColor)){
-                        var peped = document.getElementById("peped")
-                        peped.classList.remove("hidden")
-                        toastr.success("YOU WIN! Restarting game...")
-                        toastr.success("How many tries that took: " + (6 - wordle.guessesRemaining))
-                        setTimeout(function(){window.location.reload();}, 5000);
+                var bool = wordle.isRealWord(word)
+                bool.then(function (result){
+                    console.log(result)
+                    if(result == false){
+                        toastr.error("This isn't a real word")
+                    }else{
+                        console.log("this is a real word")
+                        var displayColorRow = wordle.guess(wordle.guessArray)
+                        var winningDisplayColor = ['g', 'g', 'g', 'g', 'g']
+                        wordle.colorCell(displayColorRow)
+                        wordle.guessesRemaining -= 1
+                        wordle.nextRow()
+                        if(JSON.stringify(displayColorRow) === JSON.stringify(winningDisplayColor)){
+                            var peped = document.getElementById("peped")
+                            peped.classList.remove("hidden")
+                            toastr.success("YOU WIN! Restarting game...")
+                            toastr.success("How many tries that took: " + (6 - wordle.guessesRemaining))
+                            setTimeout(function(){window.location.reload();}, 5000);
+                        }
                     }
-                }
+                })
+                
             }
         }
         else{
@@ -79,14 +84,15 @@ class Wordle{
         fetch(url).then(function(response){
             // The API call was successful!
             if(response.status === 200){
+                console.log("this is a real word though!")
                 responseBool = true
             }
             else{
-                responseBool = false;
+                responseBool = false
             }
         }).catch(function (err) {
             // There was an error
-            responseBool = false;
+            responseBool = false
             console.warn('Something went wrong.', err);
         });
         return responseBool
