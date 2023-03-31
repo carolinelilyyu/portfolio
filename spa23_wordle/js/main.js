@@ -4,6 +4,7 @@ $(document).ready(function () {
     wordle.initBoard();
     wordle.listenForKeyboard();
     wordle.initDebugAnswer();
+    // if keyup is pressed
     document.addEventListener("keyup", (e)=>{
         // is guesses remaining goes over, game over
         if (wordle.guessesRemaining === 0) {
@@ -11,7 +12,6 @@ $(document).ready(function () {
             setTimeout(function(){window.location.reload();}, 2000);
             return
         }
-
         let key = e.key
         if(key == 'Backspace'){
             wordle.deleteLetter()
@@ -22,7 +22,6 @@ $(document).ready(function () {
             }
             else{
                 var word = wordle.guessArray.join("")
-                // guessing the word because this row is filled
                 wordle.guess(word) 
             }
         }
@@ -50,7 +49,79 @@ class Wordle{
         this.guessArray = []
         this.displayColor =  ['b', 'b', 'b', 'b', 'b']
     }
+
+    // initializes the keyboard
+    initBoard(){
+        let board = document.getElementById("board")
     
+        for(let i = 0; i< this.NUMBER_OF_GUESSES; i++){
+            // create a row for each number of guesses
+            let row = document.createElement("div")
+            row.className = "row"
+    
+            for(let j = 0; j<5; j++){
+                let cell = document.createElement("div")
+                cell.className = "cell"
+                row.appendChild(cell)
+            }
+            board.appendChild(row)
+        }
+    }
+
+    // makes a button to allow the user to "debug"/see the answer
+    initDebugAnswer(){
+        var debug = document.getElementById("debug")
+        debug.addEventListener("click", (e)=>{
+            debug.innerHTML = this.answer
+        })
+    }
+
+    // the click keyboard translates to keyup
+    listenForKeyboard(){
+        var keyboard = document.getElementById("keyboard")
+
+        keyboard.addEventListener("click", (e)=>{
+            var target = e.target
+            if (!target.classList.contains("key")) {
+                return
+            }
+            let letter = target.innerHTML
+
+            if (letter === "del") {
+                letter = "Backspace"
+            } 
+            else if (letter === 'enter'){
+                letter = 'Enter'
+            }
+            document.dispatchEvent(new KeyboardEvent("keyup", {"key": letter}))
+        })
+    }
+
+    // deletes the key in your guess
+    deleteLetter(){
+        let row = document.getElementsByClassName("row")[6 - this.guessesRemaining]
+        let cell = row.children[this.nextLetter - 1]
+        cell.innerHTML = "";
+        cell.classList.remove('filled')
+        this.guessArray.pop()
+        this.nextLetter -= 1
+    }
+
+    // insert the key into your guess
+    insertLetter(key){
+        if (this.nextLetter === 5) {
+            return
+        }
+        var pressedKey = key.toLowerCase()
+        let row = document.getElementsByClassName("row")[6 - this.guessesRemaining]
+        let cell = row.children[this.nextLetter]
+        cell.innerHTML = pressedKey
+        cell.classList.add('filled')
+        this.guessArray.push(pressedKey)
+        this.nextLetter += 1
+    }
+
+    // guess first checks if the word is real, if so, it'll do the checkAnswer algorithm
     guess(word){
         var url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word
         var responseBool = false;
@@ -80,83 +151,15 @@ class Wordle{
         });
         return responseBool
     }
-                
-                
 
-    initDebugAnswer(){
-        var debug = document.getElementById("debug")
-        debug.addEventListener("click", (e)=>{
-            debug.innerHTML = this.answer
-        })
-    }
-
+    // clears the row
     nextRow(){
         this.nextLetter = 0
         this.guessArray = []
         this.displayColor =  ['b', 'b', 'b', 'b', 'b']
         this.answerArray = this.answer.split("")
     }
-
-    listenForKeyboard(){
-        var keyboard = document.getElementById("keyboard")
-
-        keyboard.addEventListener("click", (e)=>{
-            var target = e.target
-            if (!target.classList.contains("key")) {
-                return
-            }
-            let letter = target.innerHTML
     
-            if (letter === "del") {
-                letter = "Backspace"
-            } 
-            else if (letter === 'enter'){
-                letter = 'Enter'
-            }
-        
-            document.dispatchEvent(new KeyboardEvent("keyup", {"key": letter}))
-        })
-    }
-
-    deleteLetter(){
-        let row = document.getElementsByClassName("row")[6 - this.guessesRemaining]
-        let cell = row.children[this.nextLetter - 1]
-        cell.innerHTML = "";
-        cell.classList.remove('filled')
-        this.guessArray.pop()
-        this.nextLetter -= 1
-    }
-
-    insertLetter(key){
-        if (this.nextLetter === 5) {
-            return
-        }
-        var pressedKey = key.toLowerCase()
-        let row = document.getElementsByClassName("row")[6 - this.guessesRemaining]
-        let cell = row.children[this.nextLetter]
-        cell.innerHTML = pressedKey
-        cell.classList.add('filled')
-        this.guessArray.push(pressedKey)
-        this.nextLetter += 1
-    }
-
-    initBoard(){
-        let board = document.getElementById("board")
-    
-        for(let i = 0; i< this.NUMBER_OF_GUESSES; i++){
-            // create a row for each number of guesses
-            let row = document.createElement("div")
-            row.className = "row"
-    
-            for(let j = 0; j<5; j++){
-                let cell = document.createElement("div")
-                cell.className = "cell"
-                row.appendChild(cell)
-            }
-            board.appendChild(row)
-        }
-    }
-
     // instead of splitting the word, give the whole array of letters
     checkAnswer(guessArray){
         var answerArray = this.answerArray
@@ -187,10 +190,10 @@ class Wordle{
                 }
             }
         })
-
         return displayColor
     }
 
+    // given an array of colors, make the boxes corresponding to its color
     colorCell(displayColorRow){
         var guessesRemaining =  this.guessesRemaining
         let row = document.getElementsByClassName("row")[6 - guessesRemaining]
