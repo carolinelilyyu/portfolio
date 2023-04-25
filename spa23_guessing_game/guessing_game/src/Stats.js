@@ -1,11 +1,11 @@
-import {numberOfGuesses, numberOfWins} from "./Home.js"
+import {numberOfWins, numberOfTotalGuesses} from "./Home.js"
 
 export function Stats(){
     return (
-        <div>
+        <div className = "page">
             <h2>Here are your number of wins: {numberOfWins}</h2>
             <br/><br/>
-            <h2>Here are your average number of guesses: {numberOfGuesses / numberOfWins}</h2>
+            <h2>Here are your average number of guesses: {numberOfTotalGuesses / numberOfWins}</h2>
             <br/><br/>
         </div>
     );

@@ -1,72 +1,47 @@
 import {useState} from 'react';
 
-export var defaultNumberOfGuesses = 10;
-export var defaultLowestNumber = 0;
-export var defaultHighestNumber = 100;
-export var defaultAnswer = 50;
+export function Settings(props){
+    const [currGuessNum, setCurrGuessNum] = useState('')
+    const [currLowestNumber, setCurrLowestNumber] = useState('')
+    const [currHighestNumber, setCurrHighestNumber] = useState('')
 
-
-function NumberOfGuesses(){
-    const [numberOfGuesses, setNumberOfGuesses] = useState('')
 
     function handleNumberOfGuesses(e){
-        alert(numberOfGuesses)
-        defaultNumberOfGuesses = e
-        
+        e.preventDefault();
+        props.setGuessNumber(currGuessNum)        
     }
-    return (
-        <div>
-            <form>
-                <input type="text" value={numberOfGuesses} onChange={(e)=> setNumberOfGuesses(e.target.value)}></input>
-                <button onClick={(e)=>handleNumberOfGuesses(e)}>Change Number of Guesses</button>
-            </form>
-        </div>
-        
-    );
-}
 
-function LowestNumber(){
-    const [lowestNumber, setLowestNumber] = useState('')
 
     function handleLowestNumber(e){
-        alert(lowestNumber)
-        defaultLowestNumber = e
-        
+        e.preventDefault();
+        props.setLowestNumber(currLowestNumber)        
     }
-    return (
-        <div>
-            <form>
-                <input type="text" value={lowestNumber} onChange={(e)=> setLowestNumber(e.target.value)}></input>
-                <button onClick={(e)=>handleLowestNumber(e)}>Change Lowest Number</button>
-            </form>
-        </div>
-    );
-}
 
-function HighestNumber(){
-    const [highestNumber, setHighestNumber] = useState('')
 
     function handleHighestNumber(e){
-        alert(highestNumber)
-        defaultHighestNumber = e
-        
+        e.preventDefault();
+        props.setHighestNumber(currHighestNumber)        
     }
+
     return (
-        <div>
+        <div className = "page">
             <form>
-                <input type="text" value={highestNumber} onChange={(e)=> setHighestNumber(e.target.value)}></input>
+                <input type="text" value={currGuessNum} onChange={(e) => setCurrGuessNum(e.target.value)}></input>
+                <button onClick={(e)=>handleNumberOfGuesses(e)}>Change Number of Guesses</button>
+            </form>
+            
+
+            <form>
+                <input type="text" value={currLowestNumber} onChange={(e)=> setCurrLowestNumber(e.target.value)}></input>
+                <button onClick={(e)=>handleLowestNumber(e)}>Change Lowest Number</button>
+            </form>
+
+            <form>
+                <input type="text" value={currHighestNumber} onChange={(e)=> setCurrHighestNumber(e.target.value)}></input>
                 <button onClick={(e)=>handleHighestNumber(e)}>Change Highest Number</button>
             </form>
-        </div>
-    );
-}
 
-export function Settings(){
-    return (
-        <div>
-            <div><NumberOfGuesses /></div>
-            <div><LowestNumber /></div>
-            <div><HighestNumber /></div>
         </div>
+        
     );
 }

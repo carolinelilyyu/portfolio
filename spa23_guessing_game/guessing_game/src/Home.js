@@ -1,11 +1,9 @@
 import {useState} from 'react';
-import {defaultNumberOfGuesses, defaultAnswer, defaultHighestNumber, defaultLowestNumber} from './Settings.js'
 
-var answer = defaultAnswer;
-export var numberOfGuesses = defaultNumberOfGuesses;
 export var numberOfWins = 0;
+export var numberOfTotalGuesses = 0;
 
-function highOrLow(currNumber){
+function highOrLow(currNumber, answer){
     if(currNumber > answer){
         alert("This number is too high")
     }else if(currNumber < answer){
@@ -14,17 +12,23 @@ function highOrLow(currNumber){
         alert("Guessed right!")
         numberOfWins++;
     }
+    numberOfTotalGuesses++;
 }
 
-function NumberForm(){
+
+export function Home(props){
+    var answer = 50;
+    console.log(props)
+    var currGuesses = props.guessNumber;
+
     const [currNumber, setCurrNumber] = useState('')
     var num = [];
     const [numbers, setNumbers] = useState(num)
 
     function handleNewNumber(e){
         e.preventDefault();
-        numberOfGuesses--;
-        highOrLow(currNumber)
+        currGuesses--;
+        highOrLow(currNumber, answer)
         setNumbers((n)=>[...n, currNumber])
         setCurrNumber('');
     }
@@ -37,17 +41,13 @@ function NumberForm(){
             <br /><br />
             <button onClick={(e)=>handleNewNumber(e)}>Add Number</button>
         </form>
-        <p className='info'>Number of guesses left: {numberOfGuesses}</p>
+        <p className='info'>Number of guesses left: {currGuesses}</p>
+        <p className='info'>Lowest number is: {props.lowestNumber}</p>
+        <p className='info'>Highest number is: {props.highestNumber}</p>
         <hr/>
         <ul className='info number-list'>
             {numbers.map((number, i)=><li key={i}>{number}</li>)}
         </ul>
     </div>
-    );
-}
-
-export function Home(){
-    return (
-        <div><NumberForm /></div>
     );
 }
