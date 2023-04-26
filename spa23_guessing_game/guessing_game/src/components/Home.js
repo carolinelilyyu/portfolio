@@ -38,12 +38,15 @@ export default function Home(props){
     }
 
     console.log(props.answer)
+    console.log("lowest number is " + props.lowestNumber)
+    console.log("highest number is " + props.highestNumber)
     console.log("guesses left " + currGuesses)
 
     return (
     <div className='guessing-game'>
         <div id='home'> 
             <h1 id='title'>Guessing Game</h1>
+            <div id='debug'>Answer: {props.answer}</div>
 
             <form>
                 Put your guess number down:

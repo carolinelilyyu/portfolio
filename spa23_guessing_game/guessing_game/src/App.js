@@ -11,11 +11,7 @@ import "./css/style.css"
 
 
 export function randomNumber(min, max) {
-  console.log("this is the lowest received: " + min)
-  console.log("this is the highest received: " + max)
-  var answer = Math.floor(Math.random() * (max - min + 1) + min)
-  console.log(answer)
-  return answer;
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 function App() {
@@ -23,7 +19,7 @@ function App() {
   const [lowestNumber, setLowestNumber] = useState(0)
   const [highestNumber, setHighestNumber] = useState(100)
   const [numbers, setNumbers] = useState([])
-  const [answer, setAnswer] = useState(randomNumber(lowestNumber, highestNumber))
+  const [answer, setAnswer] = useState(50)
 
   return (
     <div>

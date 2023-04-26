@@ -16,9 +16,6 @@ export default function Settings(props){
     function handleLowestNumber(e){
         e.preventDefault();
         props.setLowestNumber(currLowestNumber)
-        props.setAnswer(randomNumber(currLowestNumber, props.highestNumber))     
-        console.log("highest number is " + props.highestNumber)
-        console.log("lowest number is " + currLowestNumber)
 
 
     }
@@ -27,10 +24,6 @@ export default function Settings(props){
     function handleHighestNumber(e){
         e.preventDefault();
         props.setHighestNumber(currHighestNumber)    
-        props.setAnswer(randomNumber(props.lowestNumber, currHighestNumber))   
-        console.log("lowest number is " + props.lowestNumber)
-        console.log("highest number is " + currHighestNumber)
-        console.log(props.answer)
     }
 
     console.log(props.answer)
