@@ -1,46 +1,46 @@
-import {Routes, Route, Link} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import { BrowserRouter as Router}from 'react-router-dom';
 import {useState} from 'react';
-import {Home} from './Home.js'
-import {Settings} from './Settings.js'
-import {Stats} from './Stats.js'
-import {NotFound} from './NotFound.js'
-import "./app_gs.css"
+import Home from './components/Home.js'
+import Settings from './components/Settings.js'
+import Header from './components/Header.js'
+import Stats from './components/Stats.js'
+import NotFound from './components/NotFound.js'
+import "./css/style.css"
 
-function Nav(){
-return (
-    <ul id='main-nav'>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/settings">Settings</Link></li>
-        <li><Link to="/stats">Stats</Link></li>
-    </ul>
-);
-}
 
-function Header(){
-return (
-    <div className='header'>
-        <Nav />
-    </div>
-);
+
+export function randomNumber(min, max) {
+  console.log("this is the lowest received: " + min)
+  console.log("this is the highest received: " + max)
+  var answer = Math.floor(Math.random() * (max - min + 1) + min)
+  console.log(answer)
+  return answer;
 }
 
 function App() {
   const [guessNumber, setGuessNumber] = useState(10)
   const [lowestNumber, setLowestNumber] = useState(0)
   const [highestNumber, setHighestNumber] = useState(100)
-  
+  const [numbers, setNumbers] = useState([])
+  const [answer, setAnswer] = useState(randomNumber(lowestNumber, highestNumber))
+
   return (
     <div>
+
       <Router>
         <Routes>
           <Route path="/" element={
             <div>
               <Header/> 
+              <div id="bg-image"></div>
+
               <Home 
                 guessNumber={guessNumber} 
                 lowestNumber={lowestNumber}
                 highestNumber={highestNumber}
+                answer={answer} setAnswer={(val) => setAnswer(val)} 
+                listOfGuesses={numbers} setNumbers={(val) => setNumbers(val)}
               />
             </div>
             } 
@@ -48,15 +48,18 @@ function App() {
           <Route path ="/settings" element={
             <div>
               <Header/>
+              <div id="bg-image"></div>
+
               <Settings 
                 guessNumber={guessNumber} setGuessNumber={(val) => setGuessNumber(val)} 
                 lowestNumber={lowestNumber} setLowestNumber={(val) => setLowestNumber(val)} 
                 highestNumber={highestNumber} setHighestNumber={(val) => setHighestNumber(val)} 
+                answer={answer} setAnswer={(val) => setAnswer(val)} 
               />
             </div>
             }
           />
-          <Route path ="/stats" element={<div><Header/><Stats /></div>} />
+          <Route path ="/stats" element={<div><Header/><div id="bg-image"></div><Stats /></div>} />
           <Route path="*" element={<div><Header/><NotFound /></div>} />
         </Routes>
       </Router>
