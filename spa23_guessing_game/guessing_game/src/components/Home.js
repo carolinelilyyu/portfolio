@@ -19,7 +19,6 @@ export default function Home(props){
             alert("Guessed right!")
             numberOfWins++;
             var newNum = randomNumber(props.lowestNumber, props.highestNumber);
-            console.log(newNum)
             props.setAnswer(newNum)
             setCurrGuesses(props.guessNumber)
         }
@@ -28,19 +27,16 @@ export default function Home(props){
 
     function handleNewNumber(e){
         e.preventDefault();
-        if(currGuesses < 0){
+        if(currGuesses <= 0){
             alert("No more guesses!")
         }
-        setCurrGuesses(currGuesses-1)
-        highOrLow(currNumber, props.answer)
-        props.setNumbers((n)=>[...n, currNumber])
-        setCurrNumber('');
+        else{
+            setCurrGuesses(currGuesses-1)
+            highOrLow(currNumber, props.answer)
+            props.setNumbers((n)=>[...n, currNumber])
+            setCurrNumber('');
+        }
     }
-
-    console.log(props.answer)
-    console.log("lowest number is " + props.lowestNumber)
-    console.log("highest number is " + props.highestNumber)
-    console.log("guesses left " + currGuesses)
 
     return (
     <div className='guessing-game'>
@@ -66,8 +62,8 @@ export default function Home(props){
 
             
             <div id='home-box'>
+                List of Guesses
                 <ul id='number-list'>
-                    List of Guesses
                     {props.listOfGuesses.map((number, i)=><li key={i}>{number}</li>)}
                 </ul>
             </div>

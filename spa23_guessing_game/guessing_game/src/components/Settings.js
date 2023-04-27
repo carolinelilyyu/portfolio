@@ -16,17 +16,18 @@ export default function Settings(props){
     function handleLowestNumber(e){
         e.preventDefault();
         props.setLowestNumber(currLowestNumber)
-
-
+        props.setAnswer(randomNumber(currLowestNumber, props.highestNumber))
+        props.setNumbers([])
     }
 
 
     function handleHighestNumber(e){
         e.preventDefault();
-        props.setHighestNumber(currHighestNumber)    
+        props.setHighestNumber(currHighestNumber)   
+        props.setAnswer(randomNumber(props.lowestNumber, currHighestNumber))
+        props.setNumbers([])
     }
 
-    console.log(props.answer)
     return (
         <div className = "page">
             <form>

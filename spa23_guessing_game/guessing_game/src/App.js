@@ -11,7 +11,7 @@ import "./css/style.css"
 
 
 export function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+  return Math.floor((Math.random() * ((max - min) + 1)) + parseFloat(min));
 }
 
 function App() {
@@ -51,6 +51,7 @@ function App() {
                 lowestNumber={lowestNumber} setLowestNumber={(val) => setLowestNumber(val)} 
                 highestNumber={highestNumber} setHighestNumber={(val) => setHighestNumber(val)} 
                 answer={answer} setAnswer={(val) => setAnswer(val)} 
+                listOfGuesses={numbers} setNumbers={(val) => setNumbers(val)}
               />
             </div>
             }
