@@ -101,6 +101,10 @@ h1, h2, form, .info {margin:35px}
     margin: 5px;
 }
 
+.button:disabled{
+    filter: brightness(0.7);
+}
+
 .page{
     text-align: center;
     color:white;

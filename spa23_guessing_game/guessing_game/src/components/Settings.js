@@ -6,6 +6,9 @@ export default function Settings(props){
     const [currLowestNumber, setCurrLowestNumber] = useState('')
     const [currHighestNumber, setCurrHighestNumber] = useState('')
 
+    const isCurrGuessFilled = (currGuessNum != "")
+    const isCurrLowestFilled = (currLowestNumber != "")
+    const isCurrHighestFilled = (currHighestNumber != "")
 
     function handleNumberOfGuesses(e){
         e.preventDefault();
@@ -33,20 +36,20 @@ export default function Settings(props){
             <form>
                 <input type="text" placeholder="# of Guesses" value={currGuessNum} onChange={(e) => setCurrGuessNum(e.target.value)}></input>
                 <br/>
-                <button className="button" onClick={(e)=>handleNumberOfGuesses(e)}>Save</button>
+                <button className="button" disabled={!isCurrGuessFilled} onClick={(e)=>handleNumberOfGuesses(e)}>Save</button>
             </form>
             
 
             <form>
                 <input type="text" placeholder="Lowest Number" value={currLowestNumber} onChange={(e)=> setCurrLowestNumber(e.target.value)}></input>
                 <br/>
-                <button className="button" onClick={(e)=>handleLowestNumber(e)}>Save</button>
+                <button className="button" disabled={!isCurrLowestFilled} onClick={(e)=>handleLowestNumber(e)}>Save</button>
             </form>
 
             <form>
                 <input type="text" placeholder="# Highest Number" value={currHighestNumber} onChange={(e)=> setCurrHighestNumber(e.target.value)}></input>
                 <br/>
-                <button className="button" onClick={(e)=>handleHighestNumber(e)}>Save</button>
+                <button className="button" disabled={!isCurrHighestFilled} onClick={(e)=>handleHighestNumber(e)}>Save</button>
             </form>
 
         </div>
