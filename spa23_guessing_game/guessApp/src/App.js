@@ -45,7 +45,7 @@ function App() {
             <div>
               <Header/>
               <div id="bg-image"></div>
-
+              
               <Settings 
                 guessNumber={guessNumber} setGuessNumber={(val) => setGuessNumber(val)} 
                 lowestNumber={lowestNumber} setLowestNumber={(val) => setLowestNumber(val)} 

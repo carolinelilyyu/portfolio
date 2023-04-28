@@ -46,21 +46,21 @@ export default function Home(props){
     function handleNewNumber(e){
         var result = highOrLow(currNumber, props.answer)
         e.preventDefault();
-        if(currGuesses <= 0){
-            alert("No more guesses!")
-        }
-        
         if(result == "range"){
             alert("This number is out of range.")
         }
         else if(result == "NaN"){
             alert("Please enter numbers only.")
         }
+
+        if(currGuesses <= 0){
+            alert("No more guesses!")
+        }
         else{
             setCurrGuesses(currGuesses-1)
-            guess(result)
             props.setNumbers((n)=>[...n, currNumber])
             setCurrNumber('');
+            guess(result)
         }
     }
 
@@ -70,7 +70,7 @@ export default function Home(props){
     <div className='guessing-game'>
         <div id='home'> 
             <h1 id='title'>Guessing Game</h1>
-            {/* <div id='debug'>Answer: {props.answer}</div> */}
+            <div id='debug'>Answer: {props.answer}</div>
 
             <form>
                 Put your guess number down:
