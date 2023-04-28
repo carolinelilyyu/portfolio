@@ -10,12 +10,25 @@ export default function Home(props){
 
     const [currNumber, setCurrNumber] = useState('')
 
+
     function highOrLow(currNumber, answer){
         if(currNumber > answer){
-            alert("This number is too high")
+            return "high"
         }else if(currNumber < answer){
-            alert("This number is too low")
+            return "low"
+        }else if (currNumber == answer){
+            return "right"
         }else{
+            return "wrong"
+        }
+    }
+
+    function guess(result){
+        if(result == "high"){
+            alert("This number is too high")
+        }else if(result == "low"){
+            alert("This number is too low")
+        }else if (result == "right"){
             alert("Guessed right!")
             numberOfWins++;
             var newNum = randomNumber(props.lowestNumber, props.highestNumber);
@@ -26,17 +39,24 @@ export default function Home(props){
     }
 
     function handleNewNumber(e){
+        var result = highOrLow(currNumber, props.answer)
         e.preventDefault();
         if(currGuesses <= 0){
             alert("No more guesses!")
         }
+        
+        if(result == "wrong"){
+            alert("Only enter numbers.")
+        }
         else{
             setCurrGuesses(currGuesses-1)
-            highOrLow(currNumber, props.answer)
+            guess(result)
             props.setNumbers((n)=>[...n, currNumber])
             setCurrNumber('');
         }
     }
+
+    const isCurrNumFilled = (currNumber != "")
 
     return (
     <div className='guessing-game'>
@@ -49,7 +69,7 @@ export default function Home(props){
                 <br/><br/>
                 <input type="text" name="newNumber" value={currNumber} onChange={(e)=> setCurrNumber(e.target.value)}></input>
                 <br /><br />
-                <button className='button' onClick={(e)=>handleNewNumber(e)}>Guess!</button>
+                <button className='button' disabled={!isCurrNumFilled} onClick={(e)=>handleNewNumber(e)}>Guess!</button>
             </form>
         </div>
 
