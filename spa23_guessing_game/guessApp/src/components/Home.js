@@ -12,6 +12,10 @@ export default function Home(props){
 
 
     function highOrLow(currNumber, answer){
+        if(currNumber < props.lowestNumber || currNumber > props.highestNumber){
+            return "range"
+        }
+        
         if(currNumber > answer){
             return "high"
         }else if(currNumber < answer){
@@ -19,21 +23,22 @@ export default function Home(props){
         }else if (currNumber == answer){
             return "right"
         }else{
-            return "wrong"
+            return "NaN"
         }
     }
 
     function guess(result){
         if(result == "high"){
-            alert("This number is too high")
+            alert("This number is too high.")
         }else if(result == "low"){
-            alert("This number is too low")
+            alert("This number is too low.")
         }else if (result == "right"){
             alert("Guessed right!")
             numberOfWins++;
             var newNum = randomNumber(props.lowestNumber, props.highestNumber);
             props.setAnswer(newNum)
             setCurrGuesses(props.guessNumber)
+            props.setNumbers([])
         }
         numberOfTotalGuesses++;
     }
@@ -45,8 +50,11 @@ export default function Home(props){
             alert("No more guesses!")
         }
         
-        if(result == "wrong"){
-            alert("Only enter numbers.")
+        if(result == "range"){
+            alert("This number is out of range.")
+        }
+        else if(result == "NaN"){
+            alert("Please enter numbers only.")
         }
         else{
             setCurrGuesses(currGuesses-1)
@@ -62,7 +70,7 @@ export default function Home(props){
     <div className='guessing-game'>
         <div id='home'> 
             <h1 id='title'>Guessing Game</h1>
-            <div id='debug'>Answer: {props.answer}</div>
+            {/* <div id='debug'>Answer: {props.answer}</div> */}
 
             <form>
                 Put your guess number down:
