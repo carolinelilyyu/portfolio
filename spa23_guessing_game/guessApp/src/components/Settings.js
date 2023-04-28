@@ -6,9 +6,9 @@ export default function Settings(props){
     const [currLowestNumber, setCurrLowestNumber] = useState('')
     const [currHighestNumber, setCurrHighestNumber] = useState('')
 
-    const isCurrGuessFilled = (currGuessNum != "")
-    const isCurrLowestFilled = (currLowestNumber != "")
-    const isCurrHighestFilled = (currHighestNumber != "")
+    const isCurrGuessFilled = (currGuessNum != "" && Number.isInteger(parseInt(currGuessNum)))
+    const isCurrLowestFilled = (currLowestNumber != "" && Number.isInteger(parseInt(currLowestNumber)))
+    const isCurrHighestFilled = (currHighestNumber != "" && Number.isInteger(parseInt(currHighestNumber)))
 
     function handleNumberOfGuesses(e){
         e.preventDefault();
