@@ -5,23 +5,22 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #4b3e3e;
+    background-color: var(--primary-color);
 }
 
 #main-nav li{
     display:inline;
     float: left;
-
 }
 
 #main-nav li a {
     display: block;
-    color: white;
+    color: var(--font-color);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
 #main-nav li a:hover {
-    background-color: #111;
+    background-color: var(--hover-color);
 }

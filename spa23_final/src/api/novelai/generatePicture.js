@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import JSZip from "jszip";
 import {NOVEL_AI_KEY} from "../../index.js"
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useState} from "@tanstack/react-query";
 
 export default function GeneratePicture() {
     const { data, isLoading, error } = useQuery({

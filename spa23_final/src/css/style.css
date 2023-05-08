@@ -6,3 +6,44 @@
 
 /* header css */
 @import url(./header.css);
+
+/* characters css */
+@import url(./characters.css);
+
+/* home css */
+@import url(./home.css);
+
+/* loading screen css */
+@import url(./loadingscreen.css);
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+#bg-image{
+    border: 2px solid black;
+    background: url('../media/img/bg.png') ;
+    overflow: visible;
+    position: absolute;
+    width: 90rem;
+    height:240rem;
+    left: 0rem;
+    top: 0rem;
+    z-index: -1;
+    background-size: calc(100%);
+}
+
+#bg-image2{
+    border: 2px solid black;
+    background: url('../media/img/bg2.png') ;
+    overflow: visible;
+    position: absolute;
+    width: 90rem;
+    height: 60rem;
+    left: 0rem;
+    top: 0rem;
+    z-index: -1;
+    background-size: calc(100%);
+}

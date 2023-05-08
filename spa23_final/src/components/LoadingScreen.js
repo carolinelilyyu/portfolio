@@ -1,7 +1,7 @@
 export default function LoadingScreen(props) {
     return (
         <div>
-            Loading Screen
+            This is the loading screen.
         </div>
     );
 }
