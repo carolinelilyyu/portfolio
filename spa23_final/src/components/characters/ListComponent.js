@@ -3,7 +3,7 @@ import img1 from "../../media/img/characters/img1.jpeg"
 import axios from "axios";
 import {OPENAI_API_KEY} from "../../index.js"
 import { NOVEL_AI_KEY } from '../../index.js';
-import {useQuery, useMutation} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import { useState } from "react";
 import JSZip from "jszip";
 

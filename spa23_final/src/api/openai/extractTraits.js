@@ -5,7 +5,7 @@ import {OPENAI_API_KEY} from "../../index.js"
 
 export default function ExtractTraits(props) {
     const { data, isLoading, error } = useQuery({
-        queryKey: ["grammar"],
+        queryKey: ["traits"],
         queryFn: () =>
             axios.post(
                 "https://api.openai.com/v1/completions",
