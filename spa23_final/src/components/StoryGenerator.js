@@ -4,6 +4,7 @@ import {NOVEL_AI_KEY} from "../index.js"
 import {useMutation} from "@tanstack/react-query";
 
 export default function StoryGenerator(props) {
+    console.log(props.accessToken)
     const [accessToken, setAccessToken] = useState("")
     const [story, setStory] = useState("")
     const handleStory = (e) => {

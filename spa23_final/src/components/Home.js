@@ -1,4 +1,3 @@
-import {useState} from "react"
 import React from "react";
 import Typed from 'typed.js';
 
@@ -18,10 +17,7 @@ export default function Home(props) {
         typed.destroy();
     };
     }, []);
-
-    const [title, setTitle] = useState('')
-    const [theme, setTheme] = useState('')
-    const [plot, setPlot] = useState('')
+    
     return (
         <div>
             <div id="bg-image"></div>
@@ -43,6 +39,7 @@ export default function Home(props) {
                             <div id="story-generation-img"></div>
 
                         </div>
+
                 </div>
                 
             

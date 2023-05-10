@@ -8,12 +8,13 @@ import { useState } from "react";
 import JSZip from "jszip";
 
 const ListComponent = (props) => { 
+    let savedUrl = sessionStorage.getItem("url") == null ? img1: sessionStorage.getItem("url");
+
     const [accessToken, setAccessToken] = useState("")
     const [traits, setTraits] = useState("")
-    const [url, setUrl] = React.useState(img1);
+    const [url, setUrl] = useState(savedUrl);
 
     // once generate picture, get rid of this
-
     const [currName, setCurrName] = useState('')
     const [currAge, setCurrAge] = useState('')
     const [currLore, setCurrLore] = useState('')

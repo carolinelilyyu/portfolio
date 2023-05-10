@@ -1,17 +1,42 @@
 import { useState } from "react";
 
 export default function World(props) {
-    const [life, setLife] = useState('')
-    const [beliefs, setBeliefs] = useState('')
-    const [conflicts, setConflicts] = useState('')
-    const [events, setEvents] = useState('')
+    let savedLife = sessionStorage.getItem("life") == null ? "" : sessionStorage.getItem("life");
+    let savedBeliefs = sessionStorage.getItem("beliefs") == null?  "" : sessionStorage.getItem("beliefs");
+    let savedConflicts = sessionStorage.getItem("conflicts") == null ? "" : sessionStorage.getItem("conflicts");
+    let savedEvents = sessionStorage.getItem("events") == null ? "":  sessionStorage.getItem("events");
 
-    const isWorldFilled = (life !== "" || beliefs !== "" || conflicts !== "")
+    const [life, setLife] = useState(savedLife)
+    const [beliefs, setBeliefs] = useState(savedBeliefs)
+    const [conflicts, setConflicts] = useState(savedConflicts)
+    const [events, setEvents] = useState(savedEvents)
 
-    function handeWorld(e){
+    const isWorldFilled = (life !== "" || beliefs !== "" || conflicts !== "" || events !== "")
+
+    function saveWorld(e){
         e.preventDefault();
         alert("pressed")
+
+        // Save data to sessionStorage
+        sessionStorage.setItem("life", life);
+
+        // Save data to sessionStorage
+        sessionStorage.setItem("beliefs", beliefs);
+
+        // Save data to sessionStorage
+        sessionStorage.setItem("conflicts", conflicts);
+
+        // Save data to sessionStorage
+        sessionStorage.setItem("events", events);
     }
+
+    function clear(){
+        sessionStorage.removeItem("life");
+        sessionStorage.removeItem("conflicts");
+        sessionStorage.removeItem("beliefs");
+        sessionStorage.removeItem("events");
+    }
+
     return (
         <div>
             <div id="bg-image2"></div>
@@ -36,9 +61,11 @@ export default function World(props) {
                         <br /><br />
                         What kind of major events have happened in this world to help shape what it is?
                         <br/><br/>
-                        <textarea id="freeform" name="freeform" rows="10" cols="100" placeholder="Enter text here..." value={conflicts} onChange={(e)=> setConflicts(e.target.value)}></textarea>
+                        <textarea id="freeform" name="freeform" rows="10" cols="100" placeholder="Enter text here..." value={events} onChange={(e)=> setEvents(e.target.value)}></textarea>
 
-                        <button className='submit' disabled={!isWorldFilled} onClick={(e)=>handeWorld(e)}>Save</button>
+                        <button className='submit' disabled={!isWorldFilled} onClick={(e)=>saveWorld(e)}>Save</button>
+                        <button className='clear' onClick={(e)=>clear(e)}>Clear</button>
+
             </form>
         </div>
     );

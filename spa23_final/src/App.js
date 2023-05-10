@@ -12,6 +12,12 @@ import Structure from "./components/Structure.js";
 import NotFound from "./components/NotFound.js"
 import "./css/style.css"
 
+
+import axios from "axios";
+import {useMutation} from "@tanstack/react-query";
+import { NOVEL_AI_KEY } from './index.js';
+
+
 // import GenerateGrammar from "./api/openai/generateGrammar.js"
 // import GenerateStory from "./api/novelai/generateStory.js"
 // import GeneratePicture from "../api/novelai/generatePicture.js"
@@ -19,11 +25,35 @@ import "./css/style.css"
 function App(props) {
   const [blessings, setBlessings] = useState(1);
   const [text, setText] = useState("")
-  const sentence = "Me no go to super market."
+  const [accessToken, setAccessToken] = useState("")
+
+    // accessToken logs in from Home. In the future, will implement a logging in system
+    const loginNovelAi = (e) => {
+      e.preventDefault();
+      openAILoginMutation.mutate({
+          key: NOVEL_AI_KEY,
+      },
+      {
+          onSuccess: ({ data }) => {
+              setAccessToken(data?.accessToken)
+          }
+      });
+  }
+
+  const openAILoginMutation = useMutation({
+      mutationFn: (login) => {
+          return axios.post(
+              "https://api.novelai.net/user/login", 
+              login,
+              )
+      },
+      });
 
   return (
       <div>
         <Header />
+        <button onClick={(e)=>loginNovelAi(e)}>login</button>
+
           <Routes>
             <Route
                 path="/"
@@ -45,6 +75,7 @@ function App(props) {
             />
             <Route path="/storygenerator" element={
               <StoryGenerator 
+                accessToken={accessToken}
                 text={text}
                 setText={setText}
               />} />
