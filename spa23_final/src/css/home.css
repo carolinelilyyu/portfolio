@@ -11,8 +11,22 @@ span {
 
 }
 
+#bg-image
+{
+    background: url('../media/img/bg.png') ;
+    width:  100%; /*or 70%, or what you want*/
+    height: 500rem; /*or 70%, or what you want*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    left: 0rem;
+    top: 0rem;
+    z-index:-1;
+    position: absolute;
+
+}
 .home {
-    margin-top: 500px;
+    margin-top: 70rem;
     margin-left: 50px;
     margin-right: 50px;
     text-align: center;
@@ -20,7 +34,7 @@ span {
 
 .description {
 
-    margin-top: 300px;
+    margin-top: 400px;
     margin-left: 100px;
     margin-right: 100px;
     /* margin: 20px 100px; */

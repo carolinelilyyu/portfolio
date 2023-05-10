@@ -2,15 +2,15 @@ import React from 'react';
 import img1 from "../../media/img/characters/img1.jpeg"
 import axios from "axios";
 import {OPENAI_API_KEY} from "../../index.js"
-import { NOVEL_AI_KEY } from '../../index.js';
 import {useMutation} from "@tanstack/react-query";
 import { useState } from "react";
 import JSZip from "jszip";
 
-const ListComponent = (props) => { 
-    let savedUrl = sessionStorage.getItem("url") == null ? img1: sessionStorage.getItem("url");
 
-    const [accessToken, setAccessToken] = useState("")
+const ListComponent = (props) => { 
+    console.log(props.accessToken)
+
+    let savedUrl = sessionStorage.getItem("url") == null ? img1: sessionStorage.getItem("url");
     const [traits, setTraits] = useState("")
     const [url, setUrl] = useState(savedUrl);
 
@@ -45,16 +45,6 @@ const ListComponent = (props) => {
         console.log("traits are" + traits)
         // var traits = extractTraitsMutation.data?.data.choices[0].text.replaceAll("-", ",")
 
-        openAILoginMutation.mutate({
-            key: NOVEL_AI_KEY,
-        },
-        {
-            onSuccess: ({ data }) => {
-                setAccessToken(data?.accessToken)
-            }
-        }
-        );
-        console.log("accessToken is" + accessToken)
         openAIGeneratePicMutation.mutate({
                 input: traits,
                 model: "nai-diffusion",
@@ -90,16 +80,6 @@ const ListComponent = (props) => {
         },
     });
 
-    // console.log("access token is " + accessToken)
-    const openAILoginMutation = useMutation({
-        mutationFn: (login) => {
-            return axios.post(
-                "https://api.novelai.net/user/login", 
-                login,
-                )
-        },
-    })
-
     const openAIGeneratePicMutation = useMutation({
         mutationFn: (generatePic) => {
             return axios.post(
@@ -107,7 +87,7 @@ const ListComponent = (props) => {
                 generatePic,
                 {
                     headers: {
-                        Authorization: `Bearer ${accessToken}`,
+                        Authorization: `Bearer ${props.accessToken}`,
                     },
                 responseType: "arraybuffer",
                 }
@@ -116,8 +96,8 @@ const ListComponent = (props) => {
     });
 
     return ( 
-        <div> 
-            <h3 className="characters">
+        <div className="characters"> 
+            <h3 className="character">
                 <table >
                     <tr >
                         <td>

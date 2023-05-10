@@ -25,7 +25,6 @@ import { NOVEL_AI_KEY } from './index.js';
 function App(props) {
   const [blessings, setBlessings] = useState(1);
   const [text, setText] = useState("")
-  const [accessToken, setAccessToken] = useState("")
 
     // accessToken logs in from Home. In the future, will implement a logging in system
     const loginNovelAi = (e) => {
@@ -35,7 +34,7 @@ function App(props) {
       },
       {
           onSuccess: ({ data }) => {
-              setAccessToken(data?.accessToken)
+              sessionStorage.setItem("accessToken", data?.accessToken);
           }
       });
   }
@@ -65,6 +64,7 @@ function App(props) {
             <Route
                 path="/characters"
                 element={<Characters 
+                  accessToken={sessionStorage.getItem("accessToken")}
                   currentBlessings={blessings} 
                   client = {props.client}
                   />}
@@ -75,7 +75,7 @@ function App(props) {
             />
             <Route path="/storygenerator" element={
               <StoryGenerator 
-                accessToken={accessToken}
+                accessToken={sessionStorage.getItem("accessToken")}
                 text={text}
                 setText={setText}
               />} />

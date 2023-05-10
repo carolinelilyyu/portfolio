@@ -21,8 +21,8 @@ export default function Home(props) {
     return (
         <div>
             <div id="bg-image"></div>
-
             <div className="home">
+
                 <div>
                         <span className="font-color">
                             Write about
