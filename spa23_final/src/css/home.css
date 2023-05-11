@@ -4,7 +4,7 @@
 }
 
 span{
-    font: normal 50px/ 50px var(--roboto);
+    font: normal 80px/ 80px var(--roboto);
 }
 span {
     text-shadow:1px 1px 10px hsl(50, 100%, 66%), 1px 1px 10px #ff9c1a;
@@ -13,18 +13,16 @@ span {
 
 
 .home {
-    margin-top: 70rem;
+    margin-top: 20rem;
     margin-left: 50px;
     margin-right: 50px;
     text-align: center;
 }
 
 .description {
-
     margin-top: 400px;
     margin-left: 100px;
     margin-right: 100px;
-    /* margin: 20px 100px; */
 }
 
 #character-sample{

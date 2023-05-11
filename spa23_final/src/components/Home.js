@@ -1,5 +1,6 @@
 import React from "react";
 import Typed from 'typed.js';
+import bg from "../media/img/bg.png"
 
 export default function Home(props) {
     // Create reference to store the DOM element containing the animation
@@ -20,8 +21,9 @@ export default function Home(props) {
     
     return (
         <div>
+            <img id="bg-image" src={bg} alt="bg-image" />
+
             {/* make this img, not bg-image */}
-            <div id="bg-image"></div>
             <div className="home">
 
                 <div>

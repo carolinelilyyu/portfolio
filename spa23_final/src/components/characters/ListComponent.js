@@ -9,8 +9,8 @@ import JSZip from "jszip";
 
 const ListComponent = (props) => { 
     var savedCharacterData; 
-    if (sessionStorage.getItem("characterData" + props.index)){
-        savedCharacterData = JSON.parse(sessionStorage.getItem("characterData" + props.index))
+    if (localStorage.getItem("characterData" + props.index)){
+        savedCharacterData = JSON.parse(localStorage.getItem("characterData" + props.index))
     }
 
     // console.log(savedCharacterData.length == 0)
@@ -18,45 +18,48 @@ const ListComponent = (props) => {
 
     let savedCurrName =  savedCharacterData == null ? "" : savedCharacterData[0]
     let savedCurrAge = savedCharacterData == null ? "" : savedCharacterData[1]
-    let savedCurrLore = savedCharacterData == null ? "" : savedCharacterData[2]
-    let savedCurrUrl = savedCharacterData == null ? img1 : savedCharacterData[3]
+    let savedCurrTraits = savedCharacterData == null ? "" : savedCharacterData[2]
+    let savedCurrLore = savedCharacterData == null ? "" : savedCharacterData[3]
+    let savedCurrModel = savedCharacterData == null ? "nai-diffusion" : savedCharacterData[4]
+    let savedCurrUrl = savedCharacterData == null ? img1 : savedCharacterData[5]
 
     // once generate picture, get rid of this
     const [currName, setCurrName] = useState(savedCurrName)
     const [currAge, setCurrAge] =  useState(savedCurrAge)
+    const [currTraits, setCurrTraits] = useState(savedCurrTraits)
     const [currLore, setCurrLore] =  useState(savedCurrLore)
+    const [currModel, setCurrModel] =  useState(savedCurrModel)
     const [currUrl, setCurrUrl] = useState(savedCurrUrl);
 
-    console.log("currname is " + currLore)
-    const isCurrNumFilled = (currName !== "" || currAge !== "" || currLore !== "")
+    const isCurrNumFilled = (currName !== "" || currAge !== "" || currTraits !== "" || currLore !== "" || currModel !== "")
     
 
     function saveCharacterData(e){
         e.preventDefault();
         // string becomes array
-        if(sessionStorage.getItem("characterData" + props.index) == null){
-            sessionStorage.setItem("characterData" + props.index, "[]")
+        if(localStorage.getItem("characterData" + props.index) == null){
+            localStorage.setItem("characterData" + props.index, "[]")
         }
-        var characterDataArray = JSON.parse(sessionStorage.getItem('characterData' + props.index))
+        var characterDataArray = JSON.parse(localStorage.getItem('characterData' + props.index))
         if (characterDataArray != null){
-            characterDataArray = [currName, currAge, currLore, currUrl]
+            characterDataArray = [currName, currAge, currTraits, currLore, currModel, currUrl]
         }else{
-            characterDataArray.push(currName, currAge, currLore, currUrl)
+            characterDataArray.push(currName, currAge, currTraits, currLore, currModel, currUrl)
         }
         
-        sessionStorage.setItem('characterData' + props.index, JSON.stringify(characterDataArray))
-        // if(sessionStorage.getItem('allCharacters')){
+        localStorage.setItem('characterData' + props.index, JSON.stringify(characterDataArray))
+        // if(localStorage.getItem('allCharacters')){
 
         // }
-        // var currAllCharacters = JSON.parse(sessionStorage.getItem('allCharacters'))
-        // sessionStorage.setItem('allCharacters', currAllCharacters.push())
-        console.log("this is the get " + sessionStorage.getItem('characterData' + props.index))
+        // var currAllCharacters = JSON.parse(localStorage.getItem('allCharacters'))
+        // localStorage.setItem('allCharacters', currAllCharacters.push())
+        console.log("this is the get " + localStorage.getItem('characterData' + props.index))
     }
 
 
     function clear(){
-        sessionStorage.removeItem("characterData");
-
+        localStorage.removeItem("characterData");
+        localStorage.removeItem("characterData" + props.index);
     }
 
     const handleGenerate = (e) => {
@@ -76,15 +79,16 @@ const ListComponent = (props) => {
         } ,
         {
             onSuccess: ({ data }) => {
-                // console.log(data)
                 var traits = data.choices[0].text
+                traits = traits + "," + currTraits
+                console.log(traits)
                 setTraits(traits.replaceAll("-", ","))
         } 
         });
-        
+
         openAIGeneratePicMutation.mutate({
-                input: traits,
-                model: "nai-diffusion",
+                input: traits + ", high-quality",
+                model: currModel,
                 action: "generate",
                 parameters: {},
         },{
@@ -98,7 +102,8 @@ const ListComponent = (props) => {
                 getImage();
             }
         } );
-    
+        console.log("this is the get " + localStorage.getItem('characterData' + props.index))
+
 
     }
     const extractTraitsMutation = useMutation({
@@ -152,20 +157,36 @@ const ListComponent = (props) => {
 
                     <form>
                         Character Details:
-                        <br/><br/>
-                            Name:
+                        <br/>
+                        <h2>Name:</h2>
                             <input type="text" name="newNumber" value={currName} onChange={(e)=> setCurrName(e.target.value)}></input>
-                        <br /><br />
-                        Age:
+                        <br />
+                        <h2>Age</h2>
                             <input type="text" name="newNumber" value={currAge} onChange={(e)=> setCurrAge(e.target.value)}></input>
-                        <br /><br />
+                        <br />
                     
-                        Lore:
+                        <h2>Traits:</h2>
+                            <input type="text" name="newNumber" value={currTraits} onChange={(e)=>  setCurrTraits(e.target.value)}></input>
+                        <br />
+
+                        <h2>Lore:</h2>
                             <textarea id="freeform" name="freeform" rows="20" cols="100" placeholder="Enter text here..." value={currLore} onChange={(e)=> setCurrLore(e.target.value)}></textarea>
+                        <br />
+
+                        <h2><label htmlFor="model">Choose your model:</label></h2>
+                        <select id="model" onChange={(e)=>setCurrModel(e.target.value)}>
+                            <option value="safe-diffusion">Anime Curated</option>
+                            <option value="nai-diffusion" default>Anime Full</option>
+                            <option value="nai-diffusion-furry">Furry</option>
+                        </select>
+
+                        <br />
+                        <br />
+
+                        <button className='submit' disabled={!isCurrNumFilled} onClick={(e)=>saveCharacterData(e)}>Save</button>
                         <br /><br />
 
-                            <button className='character-right submit' disabled={!isCurrNumFilled} onClick={(e)=>saveCharacterData(e)}>Save</button>
-                            <button className='clear' onClick={(e)=>clear(e)}>Clear</button>
+                        <button className='clear' onClick={(e)=>clear(e)}>Clear</button>
 
                     </form>
             </h3>

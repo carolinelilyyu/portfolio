@@ -34,7 +34,7 @@ function App(props) {
       },
       {
           onSuccess: ({ data }) => {
-              sessionStorage.setItem("accessToken", data?.accessToken);
+              localStorage.setItem("accessToken", data?.accessToken);
           }
       });
   }
@@ -64,7 +64,7 @@ function App(props) {
             <Route
                 path="/characters"
                 element={<Characters 
-                  accessToken={sessionStorage.getItem("accessToken")}
+                  accessToken={localStorage.getItem("accessToken")}
                   currentBlessings={blessings} 
                   client = {props.client}
                   />}
@@ -75,7 +75,7 @@ function App(props) {
             />
             <Route path="/storygenerator" element={
               <StoryGenerator 
-                accessToken={sessionStorage.getItem("accessToken")}
+                accessToken={localStorage.getItem("accessToken")}
                 text={text}
                 setText={setText}
               />} />

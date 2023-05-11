@@ -1,12 +1,14 @@
 import {useState} from "react"
 import axios from "axios";
-import {NOVEL_AI_KEY} from "../index.js"
 import {useMutation} from "@tanstack/react-query";
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 export default function StoryGenerator(props) {
-    console.log(props.accessToken)
-
     const [story, setStory] = useState("")
+    const isStoryFilled = (story !== "")
+
+
     const handleStory = (e) => {
         // manually refetch
         e.preventDefault();
@@ -23,7 +25,6 @@ export default function StoryGenerator(props) {
             },
         {
             onSuccess: ({ data }) => {
-                console.log(data.output)
                 setStory(story + "\n" +  data.output)
         } 
         });
@@ -62,7 +63,10 @@ export default function StoryGenerator(props) {
                     {story}
                 </textarea>
                 <br></br>
-                <button className="notepad-send" onClick={(e)=>handleStory(e)}>Send</button> 
+
+                <Button className="notepad-send" variant="contained" onClick={(e)=>handleStory(e)} disabled={!isStoryFilled} endIcon={<SendIcon />}>
+                    Send
+                </Button>
             </form>
         </div>
     );

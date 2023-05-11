@@ -25,9 +25,6 @@ export default function GenerateGrammar(props) {
                 }
                 )
         });
-    console.log(data)
-    // console.log(data.data.choices[0].text);   
-
     return (
         <div>
 

@@ -25,8 +25,6 @@ export default function ExtractTraits(props) {
                 }
                 )
         });
-    console.log(data)
-    // console.log(data.data.choices[0].text);   
 
     return (
         <div>

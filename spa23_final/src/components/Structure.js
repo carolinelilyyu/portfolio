@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 export default function Structure(props) {
-    let savedTitle = sessionStorage.getItem("life") == null ? "" : sessionStorage.getItem("title");
-    let savedTheme = sessionStorage.getItem("theme") == null? "" : sessionStorage.getItem("theme");
-    let savedPlot = sessionStorage.getItem("plot") == null ? "" : sessionStorage.getItem("plot");
+    let savedTitle = localStorage.getItem("life") == null ? "" : localStorage.getItem("title");
+    let savedTheme = localStorage.getItem("theme") == null? "" : localStorage.getItem("theme");
+    let savedPlot = localStorage.getItem("plot") == null ? "" : localStorage.getItem("plot");
 
     const [title, setTitle] = useState(savedTitle)
     const [theme, setTheme] = useState(savedTheme)
@@ -13,21 +13,21 @@ export default function Structure(props) {
     function saveStructure(e){
         e.preventDefault();
 
-        // Save data to sessionStorage
-        sessionStorage.setItem("title", title);
+        // Save data to localStorage
+        localStorage.setItem("title", title);
 
-        // Save data to sessionStorage
-        sessionStorage.setItem("theme", theme);
+        // Save data to localStorage
+        localStorage.setItem("theme", theme);
 
-        // Save data to sessionStorage
-        sessionStorage.setItem("plot", plot);
+        // Save data to localStorage
+        localStorage.setItem("plot", plot);
 
     }
 
     function clear(){
-        sessionStorage.removeItem("title");
-        sessionStorage.removeItem("theme");
-        sessionStorage.removeItem("plot");
+        localStorage.removeItem("title");
+        localStorage.removeItem("theme");
+        localStorage.removeItem("plot");
     }
 
     return (
