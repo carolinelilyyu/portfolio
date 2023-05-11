@@ -23,6 +23,7 @@ export default function StoryGenerator(props) {
             },
         {
             onSuccess: ({ data }) => {
+                console.log(data.output)
                 setStory(story + "\n" +  data.output)
         } 
         });

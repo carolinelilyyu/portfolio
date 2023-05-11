@@ -7,18 +7,55 @@ import { useState } from "react";
 import JSZip from "jszip";
 
 
-const ListComponent = (props) => { 
-    console.log(props.accessToken)
+const ListComponent = (props) => {  
+    console.log(sessionStorage.getItem("charactersData"))
 
     let savedUrl = sessionStorage.getItem("url") == null ? img1: sessionStorage.getItem("url");
+    var savedCharacterData = sessionStorage.getItem("charactersData")
+    if (savedCharacterData != null){
+        savedCharacterData = JSON.parse(savedCharacterData)
+        console.log(savedCharacterData)
+    }
+    console.log(props.index)
+    // console.log(savedCharacterData.length == 0)
     const [traits, setTraits] = useState("")
+
+    let savedCurrName =  savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][0]
+    let savedCurrAge = savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][1]
+    let savedCurrLore = savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][2]
+    
+    // once generate picture, get rid of this
+    const [currName, setCurrName] = useState(savedCurrName)
+    const [currAge, setCurrAge] =  useState(savedCurrAge)
+    const [currLore, setCurrLore] =  useState(savedCurrLore)
     const [url, setUrl] = useState(savedUrl);
 
-    // once generate picture, get rid of this
-    const [currName, setCurrName] = useState('')
-    const [currAge, setCurrAge] = useState('')
-    const [currLore, setCurrLore] = useState('')
+    console.log("currname is " + currLore)
     const isCurrNumFilled = (currName !== "" || currAge !== "" || currLore !== "")
+    
+
+    function saveCharacterData(e){
+        e.preventDefault();
+        // string becomes array
+        if(sessionStorage.getItem("charactersData") == null){
+            sessionStorage.setItem("charactersData", "[]")
+        }
+        var charactersDataArray = JSON.parse(sessionStorage.getItem('charactersData'))
+        if (charactersDataArray[props.index] != null){
+            charactersDataArray[props.index] = [currName, currAge, currLore]
+        }else{
+            charactersDataArray.push([currName, currAge, currLore])
+        }
+        
+        sessionStorage.setItem('charactersData', JSON.stringify(charactersDataArray))
+        console.log("this is the get " + sessionStorage.getItem('charactersData'))
+    }
+
+
+    function clear(){
+        sessionStorage.removeItem("charactersData");
+
+    }
 
     const handleGenerate = (e) => {
         e.preventDefault();
@@ -42,7 +79,7 @@ const ListComponent = (props) => {
                 setTraits(traits.replaceAll("-", ","))
         } 
         });
-        console.log("traits are" + traits)
+        // console.log("traits are" + traits)
         // var traits = extractTraitsMutation.data?.data.choices[0].text.replaceAll("-", ",")
 
         openAIGeneratePicMutation.mutate({
@@ -52,7 +89,7 @@ const ListComponent = (props) => {
                 parameters: {},
         },{
             onSuccess: ({data}) =>{
-                console.log(data)
+                // console.log(data)
                 async function getImage() {
                     const zip = await JSZip.loadAsync(data);
                     const blob = await zip.file("image_0.png").async("blob");
@@ -62,7 +99,7 @@ const ListComponent = (props) => {
                 getImage();
             }
         } );
-        console.log(url)
+        // console.log(url)
     
 
     }
@@ -129,7 +166,9 @@ const ListComponent = (props) => {
                             <textarea id="freeform" name="freeform" rows="20" cols="100" placeholder="Enter text here..." value={currLore} onChange={(e)=> setCurrLore(e.target.value)}></textarea>
                         <br /><br />
 
-                            <button className='character-right submit' disabled={!isCurrNumFilled} onClick={(e)=>alert(e)}>Save</button>
+                            <button className='character-right submit' disabled={!isCurrNumFilled} onClick={(e)=>saveCharacterData(e)}>Save</button>
+                            <button className='clear' onClick={(e)=>clear(e)}>Clear</button>
+
                     </form>
             </h3>
             {/* <h1>{props.text}</h1>  */}

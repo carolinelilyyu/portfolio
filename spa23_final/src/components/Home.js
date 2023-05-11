@@ -20,6 +20,7 @@ export default function Home(props) {
     
     return (
         <div>
+            {/* make this img, not bg-image */}
             <div id="bg-image"></div>
             <div className="home">
 
