@@ -7,28 +7,25 @@ import { useState } from "react";
 import JSZip from "jszip";
 
 
-const ListComponent = (props) => {  
-    console.log(sessionStorage.getItem("charactersData"))
-
-    let savedUrl = sessionStorage.getItem("url") == null ? img1: sessionStorage.getItem("url");
-    var savedCharacterData = sessionStorage.getItem("charactersData")
-    if (savedCharacterData != null){
-        savedCharacterData = JSON.parse(savedCharacterData)
-        console.log(savedCharacterData)
+const ListComponent = (props) => { 
+    var savedCharacterData; 
+    if (sessionStorage.getItem("characterData" + props.index)){
+        savedCharacterData = JSON.parse(sessionStorage.getItem("characterData" + props.index))
     }
-    console.log(props.index)
+
     // console.log(savedCharacterData.length == 0)
     const [traits, setTraits] = useState("")
 
-    let savedCurrName =  savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][0]
-    let savedCurrAge = savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][1]
-    let savedCurrLore = savedCharacterData[props.index] == null ? "" : savedCharacterData[props.index][2]
-    
+    let savedCurrName =  savedCharacterData == null ? "" : savedCharacterData[0]
+    let savedCurrAge = savedCharacterData == null ? "" : savedCharacterData[1]
+    let savedCurrLore = savedCharacterData == null ? "" : savedCharacterData[2]
+    let savedCurrUrl = savedCharacterData == null ? img1 : savedCharacterData[3]
+
     // once generate picture, get rid of this
     const [currName, setCurrName] = useState(savedCurrName)
     const [currAge, setCurrAge] =  useState(savedCurrAge)
     const [currLore, setCurrLore] =  useState(savedCurrLore)
-    const [url, setUrl] = useState(savedUrl);
+    const [currUrl, setCurrUrl] = useState(savedCurrUrl);
 
     console.log("currname is " + currLore)
     const isCurrNumFilled = (currName !== "" || currAge !== "" || currLore !== "")
@@ -37,23 +34,28 @@ const ListComponent = (props) => {
     function saveCharacterData(e){
         e.preventDefault();
         // string becomes array
-        if(sessionStorage.getItem("charactersData") == null){
-            sessionStorage.setItem("charactersData", "[]")
+        if(sessionStorage.getItem("characterData" + props.index) == null){
+            sessionStorage.setItem("characterData" + props.index, "[]")
         }
-        var charactersDataArray = JSON.parse(sessionStorage.getItem('charactersData'))
-        if (charactersDataArray[props.index] != null){
-            charactersDataArray[props.index] = [currName, currAge, currLore]
+        var characterDataArray = JSON.parse(sessionStorage.getItem('characterData' + props.index))
+        if (characterDataArray != null){
+            characterDataArray = [currName, currAge, currLore, currUrl]
         }else{
-            charactersDataArray.push([currName, currAge, currLore])
+            characterDataArray.push(currName, currAge, currLore, currUrl)
         }
         
-        sessionStorage.setItem('charactersData', JSON.stringify(charactersDataArray))
-        console.log("this is the get " + sessionStorage.getItem('charactersData'))
+        sessionStorage.setItem('characterData' + props.index, JSON.stringify(characterDataArray))
+        // if(sessionStorage.getItem('allCharacters')){
+
+        // }
+        // var currAllCharacters = JSON.parse(sessionStorage.getItem('allCharacters'))
+        // sessionStorage.setItem('allCharacters', currAllCharacters.push())
+        console.log("this is the get " + sessionStorage.getItem('characterData' + props.index))
     }
 
 
     function clear(){
-        sessionStorage.removeItem("charactersData");
+        sessionStorage.removeItem("characterData");
 
     }
 
@@ -79,9 +81,7 @@ const ListComponent = (props) => {
                 setTraits(traits.replaceAll("-", ","))
         } 
         });
-        // console.log("traits are" + traits)
-        // var traits = extractTraitsMutation.data?.data.choices[0].text.replaceAll("-", ",")
-
+        
         openAIGeneratePicMutation.mutate({
                 input: traits,
                 model: "nai-diffusion",
@@ -89,17 +89,15 @@ const ListComponent = (props) => {
                 parameters: {},
         },{
             onSuccess: ({data}) =>{
-                // console.log(data)
                 async function getImage() {
                     const zip = await JSZip.loadAsync(data);
                     const blob = await zip.file("image_0.png").async("blob");
                     // Iterate over each file in the zip archive
-                    setUrl(window.URL.createObjectURL(blob));
+                    setCurrUrl(window.URL.createObjectURL(blob));
                 }
                 getImage();
             }
         } );
-        // console.log(url)
     
 
     }
@@ -140,7 +138,7 @@ const ListComponent = (props) => {
                         <td>
                             <div className="imgContainer">
                                         <div>
-                                            <img className="character-right" src={url} />
+                                            <img className="character-right" src={currUrl} />
                                         </div>
                                         <div className="generate">
                                             <button value="test" onClick={(e)=>

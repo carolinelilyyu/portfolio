@@ -6,7 +6,7 @@ export default function Characters(props) {
     const [components, setComponents] = useState(["character"]); 
 
     // Save details about characters as an array
-    // localStorage.setItem("charactersData", "[]");
+    // allCharacters.setItem("allCharacters", "[]");
 
 
     const Characters = () => {
